@@ -192,49 +192,15 @@
 
 						<script>
 								$(document).ready(function(){
-									var collection = new AgentsC({url:'http://callcenter.front-desk.ca/service/get-agents-all?date=2016-03-15T7:58:34'});
-									///collection.bind('add',function(item){
-									//	console.log(item);
-									//})
+									var collection = new AgentsC({
+										url:'http://callcenter.front-desk.ca/service/get-agents-all',
+										params:{
+											date:'2016-03-15T7:58:34'
+										}
+									});
+
 									var t = new TableView({collection:collection });
 
-									//console.log(t);
-									/*var options ={
-										geturl:'http://callcenter.front-desk.ca/service/getagents?date=',
-										getparams:'2016-03-15T7:58:34',
-										list:'[data-id=list]:first'
-
-									}
-
-									var list = new table.TableInfin('#Table1',options);
-									list.init();
-									list.loadData();
-
-
-									var stamp;
-									list.onData = function(data){
-										//  console.log(data);
-										stamp = data.stamp;
-										var ar = data.result.list;
-										for(var i=0,n=ar.length;i<n;i++){
-											var item = ar[i];
-											item.key=item.id;
-											item.icon = 'fa fa-'+item.fa;
-											item.aux_color = (item.color=='green'?'':item.color);
-										}
-										//data=ar;
-										//console.log(ar);
-										list.setData.call(list,ar);
-									}
-
-									setInterval(function(){
-										list.getparams = stamp
-										list.loadData();
-									},5000);
-
-									setInterval(function(){
-										//	list.scrollUp();
-									},6000)*/
 
 								})
 

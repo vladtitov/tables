@@ -31,15 +31,16 @@ var AgentM = (function (_super) {
 var Row = (function (_super) {
     __extends(Row, _super);
     function Row(options) {
+        var _this = this;
         _super.call(this, options);
         this.template = _.template($('#row-template').html());
-        // this.model.bind('change', ()=>this.render());
-        // this.model.bind('destroy',()=>this.destroy());
-        // this.model.bind('remove',()=>this.remove());
+        this.model.bind('change', function () { return _this.render(); });
+        this.model.bind('destroy', function () { return _this.destroy(); });
+        this.model.bind('remove', function () { return _this.remove(); });
         //  this.model.bind('add',()=>this.add());
     }
     Row.prototype.render = function () {
-        console.log(this.model);
+        // console.log(this.model);
         this.$el.html(this.template(this.model.toJSON()));
         return this;
     };
@@ -68,12 +69,20 @@ var AppModel = (function (_super) {
 var AgentsC = (function (_super) {
     __extends(AgentsC, _super);
     function AgentsC(options) {
+        var _this = this;
         _super.call(this, options);
         this.model = AgentM;
         this.url = options.url;
+        this.params = options.params;
+        this.fetch({ data: this.params });
+        console.log(this.params);
+        setInterval(function () {
+            _this.fetch({ data: _this.params });
+        }, 5000);
     }
     AgentsC.prototype.parse = function (res) {
-        // this.data = res;
+        var d = res.stamp;
+        this.params.date = d.replace(' ', 'T');
         var stamp = Date.now();
         _.map(res.result.list, function (item) {
             item.stamp = stamp;
@@ -97,7 +106,7 @@ var TableView = (function (_super) {
             console.log('remove', evt);
         }, this);
         this.collection.bind("add", function (evt) {
-            console.log('add', evt);
+            //  console.log('add',evt);
             var row = new Row({ model: evt, tagName: 'tr' });
             _this.$el.append(row.render().el);
         }, this);
@@ -105,10 +114,6 @@ var TableView = (function (_super) {
             console.log(this);
             return this;
         };
-        this.collection.fetch();
-        setInterval(function () {
-            _this.collection.fetch();
-        }, 5000);
     }
     TableView.prototype.render = function () {
         console.log('render');

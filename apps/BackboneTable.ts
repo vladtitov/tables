@@ -34,14 +34,14 @@ class Row extends Backbone.View<AgentM>{
         super(options);
 
         this.template = _.template($('#row-template').html());
-       // this.model.bind('change', ()=>this.render());
-       // this.model.bind('destroy',()=>this.destroy());
-       // this.model.bind('remove',()=>this.remove());
+        this.model.bind('change', ()=>this.render());
+        this.model.bind('destroy',()=>this.destroy());
+       this.model.bind('remove',()=>this.remove());
       //  this.model.bind('add',()=>this.add());
     }
 
     render() {
-        console.log(this.model);
+       // console.log(this.model);
         this.$el.html(this.template(this.model.toJSON()));
 
         return this;
@@ -72,24 +72,28 @@ class AppModel extends Backbone.Model{
 }
 
 class AgentsC extends Backbone.Collection<AgentM>{
-
     model = AgentM;
     data:any;
-
+    params:any;
     constructor(options:any){
         super(options)
-        this.url = options.url
-
+        this.url = options.url;
+        this.params = options.params;
+        this.fetch({data:this.params});
+        console.log(this.params);
+        setInterval(()=> {
+            this.fetch({data:this.params});
+        }, 5000);
     }
     parse(res){
-    // this.data = res;
-
-      var stamp = Date.now();
+        var d:string = res.stamp;
+        this.params.date=d.replace(' ','T');
+        var stamp = Date.now();
      _.map(res.result.list,function(item:any){
      item.stamp = stamp;
      item.icon = 'fa fa-'+item.fa;
-
      });
+
     // console.log(res.result.list.length);
     //  console.log(res);
     return res.result.list
@@ -111,7 +115,7 @@ class TableView extends Backbone.View<AppModel>{
         },this);
 
         this.collection.bind("add",(evt)=>{
-           console.log('add',evt);
+         //  console.log('add',evt);
          var row = new Row({model:evt,tagName:'tr'});
            this.$el.append(row.render().el);
       },this);
@@ -119,11 +123,6 @@ class TableView extends Backbone.View<AppModel>{
             console.log(this);
             return this;
         }
-        this.collection.fetch();
-       setInterval(()=> {
-            this.collection.fetch();
-
-        }, 5000);
     }
 
     render():TableView{
