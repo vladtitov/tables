@@ -30,10 +30,10 @@ class AgentM extends Backbone.Model{
 class Row extends Backbone.View<AgentM>{
     template:(data:any)=>string;
     model:AgentM;
+    static template:any
     constructor(options:any){
         super(options);
 
-        this.template = _.template($('#row-template').html());
         this.model.bind('change', ()=>this.render());
         this.model.bind('destroy',()=>this.destroy());
        this.model.bind('remove',()=>this.remove());
@@ -42,7 +42,7 @@ class Row extends Backbone.View<AgentM>{
 
     render() {
        // console.log(this.model);
-        this.$el.html(this.template(this.model.toJSON()));
+        this.$el.html(Row.template(this.model.toJSON()));
 
         return this;
     }
@@ -107,6 +107,7 @@ class TableView extends Backbone.View<AppModel>{
     constructor(options){
         super(options);
        this.setElement($("#TableList"), true);
+        Row.template =  _.template($('#row-template').html());
      
        // collection.bind('reset', this.render);
       this.collection = options.collection;

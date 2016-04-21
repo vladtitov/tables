@@ -33,7 +33,6 @@ var Row = (function (_super) {
     function Row(options) {
         var _this = this;
         _super.call(this, options);
-        this.template = _.template($('#row-template').html());
         this.model.bind('change', function () { return _this.render(); });
         this.model.bind('destroy', function () { return _this.destroy(); });
         this.model.bind('remove', function () { return _this.remove(); });
@@ -41,7 +40,7 @@ var Row = (function (_super) {
     }
     Row.prototype.render = function () {
         // console.log(this.model);
-        this.$el.html(this.template(this.model.toJSON()));
+        this.$el.html(Row.template(this.model.toJSON()));
         return this;
     };
     Row.prototype.remove = function () {
@@ -100,6 +99,7 @@ var TableView = (function (_super) {
         var _this = this;
         _super.call(this, options);
         this.setElement($("#TableList"), true);
+        Row.template = _.template($('#row-template').html());
         // collection.bind('reset', this.render);
         this.collection = options.collection;
         this.collection.bind('remove', function (evt) {
