@@ -40,6 +40,7 @@ module table2{
             this.id = item.id;
             this.order = -1;
         }
+
         initView(){
             var $view = $(this.template);
             var $els:any  = {};
