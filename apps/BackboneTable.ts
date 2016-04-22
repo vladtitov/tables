@@ -10,6 +10,7 @@ class VOAgent{
     name:string;
     time:number;
     aux:string;
+    
 }
 class AgentM extends Backbone.Model{
 
