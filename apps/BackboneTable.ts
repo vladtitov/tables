@@ -12,6 +12,7 @@ class VOAgent{
     aux:string;
     
 }
+
 class AgentM extends Backbone.Model{
 
     defaults():VOAgent{
