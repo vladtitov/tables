@@ -7,7 +7,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var VOAgent = (function () {
-    function VOAgent() {
+    function VOAgent(obj) {
+        for (var s in obj)
+            this[s] = obj[s];
     }
     return VOAgent;
 }());
@@ -38,9 +40,15 @@ var Row = (function (_super) {
         this.model.bind('remove', function () { return _this.remove(); });
         //  this.model.bind('add',()=>this.add());
     }
-    Row.prototype.render = function () {
-        // console.log(this.model);
+    Row.prototype.initMe = function () {
         this.$el.html(Row.template(this.model.toJSON()));
+        this.$icon = this.$el.find('.icon');
+    };
+    Row.prototype.render = function () {
+        if (!this.isInit)
+            this.initMe();
+        this.$icon.attr('class', this.model.get('icon'));
+        // console.log(this.model);
         return this;
     };
     Row.prototype.remove = function () {
@@ -80,16 +88,20 @@ var AgentsC = (function (_super) {
         }, 5000);
     }
     AgentsC.prototype.parse = function (res) {
+        /// console.log(res);
         var d = res.stamp;
         this.params.date = d.replace(' ', 'T');
         var stamp = Date.now();
-        _.map(res.result.list, function (item) {
-            item.stamp = stamp;
+        var ar = res.result.list;
+        var out;
+        out = _.map(res.result.list, function (item) {
+            //item.stamp = stamp;
             item.icon = 'fa fa-' + item.fa;
+            return new VOAgent(item);
         });
         // console.log(res.result.list.length);
-        //  console.log(res);
-        return res.result.list;
+        // console.log(out);
+        return out;
     };
     return AgentsC;
 }(Backbone.Collection));

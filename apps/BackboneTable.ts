@@ -10,6 +10,9 @@ class VOAgent{
     name:string;
     time:number;
     aux:string;
+    constructor(obj:any){
+        for (var s in obj)this[s]=obj[s];
+    }
     
 }
 
@@ -33,6 +36,10 @@ class Row extends Backbone.View<AgentM>{
     template:(data:any)=>string;
     model:AgentM;
     static template:any
+    $icon:JQuery
+    $name:JQuery;
+    isInit:boolean
+    
     constructor(options:any){
         super(options);
 
@@ -42,9 +49,16 @@ class Row extends Backbone.View<AgentM>{
       //  this.model.bind('add',()=>this.add());
     }
 
-    render() {
-       // console.log(this.model);
+    private initMe():void{
         this.$el.html(Row.template(this.model.toJSON()));
+        this.$icon= this.$el.find('.icon');
+        
+    }
+    render() {
+        if(!this.isInit)this.initMe();
+        this.$icon.attr('class',this.model.get('icon'));
+       // console.log(this.model);
+        
 
         return this;
     }
@@ -73,6 +87,7 @@ class AppModel extends Backbone.Model{
     
 }
 
+
 class AgentsC extends Backbone.Collection<AgentM>{
     model = AgentM;
     data:any;
@@ -87,18 +102,26 @@ class AgentsC extends Backbone.Collection<AgentM>{
             this.fetch({data:this.params});
         }, 5000);
     }
-    parse(res){
+    parse(res:any){
+       /// console.log(res);
+
         var d:string = res.stamp;
         this.params.date=d.replace(' ','T');
-        var stamp = Date.now();
-     _.map(res.result.list,function(item:any){
-     item.stamp = stamp;
-     item.icon = 'fa fa-'+item.fa;
+        var stamp:number = Date.now();
+        var ar:any[]= res.result.list;
+        var out:VOAgent[]
+
+   out =  _.map(res.result.list,function(item:any){
+                 //item.stamp = stamp;
+                 item.icon = 'fa fa-'+ item.fa;
+       return new VOAgent(item);
      });
 
+
+
     // console.log(res.result.list.length);
-    //  console.log(res);
-    return res.result.list
+    // console.log(out);
+    return out;
 }
     //parse:(data)=>{ }
 }
