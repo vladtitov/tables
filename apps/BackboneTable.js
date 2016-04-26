@@ -50,15 +50,20 @@ var Row = (function (_super) {
         //if(!this.isInit)this.initMe();
         //this.$icon.attr('class',this.model.get('icon'));
         // console.log(this.model);
+        if (this.isFilling) {
+            return;
+        }
         this.changeIcon1();
         this.$el.html(Row.template(this.model.toJSON()));
         return this;
     };
     Row.prototype.changeIcon1 = function () {
         // console.log(this.model.get('fa'))
+        this.isFilling = true;
         this.model.set('iconold', 'out ' + this.icon1);
         this.icon1 = 'fa fa-' + this.model.get('fa');
         this.model.set('icon', 'in ' + this.icon1);
+        this.isFilling = false;
     };
     Row.prototype.changeIcon2 = function () {
     };
@@ -89,15 +94,16 @@ var AppModel = (function (_super) {
 var AgentsC = (function (_super) {
     __extends(AgentsC, _super);
     function AgentsC(options) {
+        var _this = this;
         _super.call(this, options);
         this.model = AgentM;
         this.url = options.url;
         this.params = options.params;
         this.fetch({ data: this.params });
         console.log(this.params);
-        /*setInterval(()=> {
-            this.fetch({data:this.params});
-        }, 5000);*/
+        setInterval(function () {
+            _this.fetch({ data: _this.params });
+        }, 25000);
     }
     AgentsC.prototype.parse = function (res) {
         console.log(res);

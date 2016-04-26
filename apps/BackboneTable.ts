@@ -50,6 +50,7 @@ class Row extends Backbone.View<AgentM>{
    /* $icon:JQuery;
     $name:JQuery;*/
     isInit:boolean;
+    isFilling:boolean;
     Icon:HTMLDivElement;
     
     constructor(options:any){
@@ -66,11 +67,12 @@ class Row extends Backbone.View<AgentM>{
         
     }
     render() {
+        
         //if(!this.isInit)this.initMe();
         //this.$icon.attr('class',this.model.get('icon'));
        // console.log(this.model);
 
-
+        if (this.isFilling){return}
         this.changeIcon1();
         this.$el.html(Row.template(this.model.toJSON()));
         
@@ -79,13 +81,15 @@ class Row extends Backbone.View<AgentM>{
     }
 
     private icon1:string='';
-    private changeIcon1(){
+    changeIcon1(){
       // console.log(this.model.get('fa'))
-
-
+        this.isFilling=true;
+        
         this.model.set('iconold','out '+this.icon1);
         this.icon1 = 'fa fa-'+ this.model.get('fa');
         this.model.set('icon','in '+this.icon1);
+       
+        this.isFilling=false;
     }
     private changeIcon2(){
 
@@ -131,9 +135,9 @@ class AgentsC extends Backbone.Collection<AgentM>{
         this.params = options.params;
         this.fetch({data:this.params});
         console.log(this.params);
-        /*setInterval(()=> {
+        setInterval(()=> {
             this.fetch({data:this.params});
-        }, 5000);*/
+        }, 25000);
     }
     parse(res:any){
         console.log(res);

@@ -169,15 +169,22 @@
 							</div>
 
 					<style type="text/css">
-						.tr05 .fa{
+						/*.tr05 .fa{
 							transition: transform 0.3s;
 						}
-						.tr05 .fa.in{
-							transform:translateY(100%);
+						.tr05 .in{
+							transform:translateY(0);
 						}
-						.tr05 .fa.out{
+						.tr05 .out{
 							transform:translateY(-100%);
 						}
+						.tr06 .new{
+							transform:translateY(100%);
+						}
+						.
+						.tr06 .out.go{
+							transform:translateY(0);
+						}*/
 						.prev{
 							transform:rotateX(-90deg);
 
@@ -185,6 +192,38 @@
 						.next{
 							transform:rotateX(0deg);
 
+						}
+
+
+						@keyframes goin {
+							0% {
+								transform:translateY(100%);
+							}
+
+							100% {
+								transform:translateY(0);
+							}
+						}
+						.tr05 .fa.in {
+							-webkit-animation: goin 5s; /* Safari 4+ */
+							-moz-animation:    goin 5s; /* Fx 5+ */
+							-o-animation:     goin 5s; /* Opera 12+ */
+							animation:        goin 5s ; /* IE 10+, Fx 29+ */
+						}
+						@keyframes goout {
+							0% {
+								transform:translateY(0%);
+							}
+
+							100% {
+								transform:translateY(-100%);
+							}
+						}
+						.tr05 .fa.out {
+							-webkit-animation: goout 5s; /* Safari 4+ */
+							-moz-animation:    goout 5s; /* Fx 5+ */
+							-o-animation:     goout 5s; /* Opera 12+ */
+							animation:        goout 5s ; /* IE 10+, Fx 29+ */
 						}
 
 
