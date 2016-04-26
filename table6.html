@@ -169,16 +169,39 @@
 							</div>
 
 					<style type="text/css">
-						/*.tr05 .fa{
-							transition: transform 0.3s;
+						.tr05 .rel{
+							position: relative;
+
+						}
+						.tr05 .rel>div{
+							position: absolute;
+
+						}
+						.tr05 .aux{
+							height:1.2em;
+							overflow: hidden;
+
+						}
+						.tr05 .aux>div{
+
+						}
+						.tr05 .fa, .tr05 .trans{
+							transition: transform 0.5s;
+							transform:translateY(0);
+						}
+						.tr05 .in.trans{
+							transform:translateY(100%);
+						}
+						.tr05 .out.trans{
+							transform:translateY(-100%);
 						}
 						.tr05 .in{
-							transform:translateY(0);
+							transform:translateY(100%);
 						}
 						.tr05 .out{
 							transform:translateY(-100%);
 						}
-						.tr06 .new{
+						/*.tr06 .new{
 							transform:translateY(100%);
 						}
 						.
@@ -194,6 +217,7 @@
 
 						}
 
+/*
 
 						@keyframes goin {
 							0% {
@@ -205,10 +229,10 @@
 							}
 						}
 						.tr05 .fa.in {
-							-webkit-animation: goin 5s; /* Safari 4+ */
-							-moz-animation:    goin 5s; /* Fx 5+ */
-							-o-animation:     goin 5s; /* Opera 12+ */
-							animation:        goin 5s ; /* IE 10+, Fx 29+ */
+							-webkit-animation: goin 5s; !* Safari 4+ *!
+							-moz-animation:    goin 5s; !* Fx 5+ *!
+							-o-animation:     goin 5s; !* Opera 12+ *!
+							animation:        goin 5s ; !* IE 10+, Fx 29+ *!
 						}
 						@keyframes goout {
 							0% {
@@ -220,11 +244,12 @@
 							}
 						}
 						.tr05 .fa.out {
-							-webkit-animation: goout 5s; /* Safari 4+ */
-							-moz-animation:    goout 5s; /* Fx 5+ */
-							-o-animation:     goout 5s; /* Opera 12+ */
-							animation:        goout 5s ; /* IE 10+, Fx 29+ */
+							-webkit-animation: goout 5s; !* Safari 4+ *!
+							-moz-animation:    goout 5s; !* Fx 5+ *!
+							-o-animation:     goout 5s; !* Opera 12+ *!
+							animation:        goout 5s ; !* IE 10+, Fx 29+ *!
 						}
+*/
 
 
 					</style>
@@ -234,8 +259,7 @@
 							<!--Template Row start -->
 							<script id="row-template" type="text/template" data-id="template">
 								<td class="td0">
-									<div class="icon" >
-										<div class="<%=iconold%>"  data-id="icon"></div>
+									<div class="icon rel" >
 										<div class="<%=icon%>"  data-id="icon"></div>
 									</div>
 								</td>
@@ -246,8 +270,8 @@
 									<span data-id="time,time_color" class="<%=time_color%>"><%=time%></span>
 								</td>
 								<td class="td3">
-									<div class="animation">
-										<div data-id="aux,aux_color" ><%=aux%></div>
+									<div class="aux rel">
+										<div data-id="aux" class="trans" ><%=aux%></div>
 									</div>
 								</td>
 

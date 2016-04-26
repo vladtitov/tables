@@ -37,12 +37,50 @@ var Row = (function (_super) {
     function Row(options) {
         var _this = this;
         _super.call(this, options);
-        this.icon1 = '';
-        this.model.bind('change', function () { return _this.render(); });
+        this.model.bind('change:icon', function () { return _this.changeIcon1(); });
+        this.model.bind('change:aux', function () { return _this.changeAux(); });
+        this.model.bind('change:time', function () { return _this.onTimeChange(); });
         this.model.bind('destroy', function () { return _this.destroy(); });
         this.model.bind('remove', function () { return _this.remove(); });
         //  this.model.bind('add',()=>this.add());
     }
+    Row.prototype.onTimeChange = function () {
+        var TimeDiv = this.$time;
+        this.time = this.model.get("time");
+    };
+    Row.prototype.changeAux = function () {
+        // var newclass:string = this.model.get('')
+        // this.$aux;
+        var old = this.$aux.children(0).addClass('out');
+        var n = $('<div>').addClass('trans in').html(this.model.get('aux')).appendTo(this.$aux);
+        setTimeout(function () { n.removeClass('in'); }, 10);
+        setTimeout(function () { old.remove(); }, 2000);
+    };
+    Row.prototype.changeIcon1 = function () {
+        var $icon = this.$icon;
+        var old = $icon.children().addClass('out');
+        setTimeout(function () {
+            old.remove();
+        }, 2000);
+        var newdiv = $('<div>').addClass('new in fa fa-' + this.model.get('fa')).appendTo($icon);
+        setTimeout(function () {
+            newdiv.removeClass('new in');
+        }, 10);
+    };
+    Row.prototype.initialize = function () {
+        var _this = this;
+        this.$el.html(Row.template(this.model.toJSON()));
+        this.$icon = this.$el.find('.icon').first();
+        this.$aux = this.$el.find('.aux').first();
+        this.$time = this.$el.find('.td2>span').first();
+        //d.setUTCSeconds(this.model.get("time"));
+        setInterval(function () {
+            var dt = new Date();
+            dt.setSeconds(-(_this.model.get("time")));
+            dt = new Date(Date.now() - dt.getTime());
+            _this.$time.text(("0" + dt.getUTCHours()).substr(-2) + ":" + ("0" + dt.getUTCMinutes()).substr(-2) + ":" + ("0" + dt.getUTCSeconds()).substr(-2));
+        }, 1000);
+    };
     Row.prototype.initMe = function () {
         this.Icon = this.$el.find('.icon:first').get();
     };
@@ -50,20 +88,10 @@ var Row = (function (_super) {
         //if(!this.isInit)this.initMe();
         //this.$icon.attr('class',this.model.get('icon'));
         // console.log(this.model);
-        if (this.isFilling) {
-            return;
-        }
-        this.changeIcon1();
-        this.$el.html(Row.template(this.model.toJSON()));
+        // if (this.isFilling){return}
+        // this.changeIcon1();
+        // this.$el.html(Row.template(this.model.toJSON()));
         return this;
-    };
-    Row.prototype.changeIcon1 = function () {
-        // console.log(this.model.get('fa'))
-        this.isFilling = true;
-        this.model.set('iconold', 'out ' + this.icon1);
-        this.icon1 = 'fa fa-' + this.model.get('fa');
-        this.model.set('icon', 'in ' + this.icon1);
-        this.isFilling = false;
     };
     Row.prototype.changeIcon2 = function () {
     };
@@ -103,7 +131,7 @@ var AgentsC = (function (_super) {
         console.log(this.params);
         setInterval(function () {
             _this.fetch({ data: _this.params });
-        }, 25000);
+        }, 5000);
     }
     AgentsC.prototype.parse = function (res) {
         console.log(res);
@@ -112,12 +140,11 @@ var AgentsC = (function (_super) {
         //  var stamp:number = Date.now();
         //  var ar:any[]= res.result.list;
         // var out:VOAgent[]
-        /*  out =  _.map(res.result.list,function(item:any){
-                        //item.stamp = stamp;
-       
-                        item.icon = 'fa fa-'+ item.fa;
-              return new VOAgent(item);
-            });*/
+        _.map(res.result.list, function (item) {
+            //item.stamp = stamp;
+            item.icon = 'fa fa-' + item.fa;
+            /// return new VOAgent(item);
+        });
         // console.log(res.result.list.length);
         // console.log(out);
         return res.result.list;
