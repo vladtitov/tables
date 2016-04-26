@@ -22,9 +22,9 @@ class AgentM extends Backbone.Model{
     id:number;
     fa:string;
     icon:string;
-    iconold:string;
     name:string;
     time:number;
+    time_color:string;
     aux:string;
 
     defaults():any{
@@ -33,9 +33,9 @@ class AgentM extends Backbone.Model{
             id:0,
             fa:'',
             icon:'',
-            iconold:'',
             name:'',
             time:0,
+            time_color:'',
             aux:''
         }
     }
@@ -63,6 +63,7 @@ class Row extends Backbone.View<AgentM>{
         this.model.bind('change:icon', ()=>this.changeIcon1());
         this.model.bind('change:aux', ()=>this.changeAux());
         this.model.bind('change:time', ()=>this.onTimeChange());
+        this.model.bind('change:time_color', ()=>this.onTimeColorChange());
         this.model.bind('destroy',()=>this.destroy());
         this.model.bind('remove',()=>this.remove());
 
@@ -72,8 +73,13 @@ class Row extends Backbone.View<AgentM>{
     }
 
     private onTimeChange():void{
-        var TimeDiv:JQuery=this.$time;
+        var TimeSpan:JQuery=this.$time;
         this.time = this.model.get("time");
+    }
+    private onTimeColorChange():void{
+        var TimeSpan:JQuery=this.$time;
+        TimeSpan.removeClass().addClass(this.model.get("time_color"));
+       
     }
 
     private changeAux():void{
@@ -91,9 +97,9 @@ class Row extends Backbone.View<AgentM>{
         setTimeout(function(){
             old.remove();
         },2000)
-       var newdiv= $('<div>').addClass('new in fa fa-'+this.model.get('fa')).appendTo($icon);
+       var newdiv= $('<div>').addClass('in fa fa-'+this.model.get('fa')).appendTo($icon);
         setTimeout(function (){
-            newdiv.removeClass('new in');
+            newdiv.removeClass('in');
         },10);
 
     }

@@ -36,7 +36,7 @@
 
 	<body>
 		<div class="">
-				<div class="col-md-8" style="height:91vh; background:white; padding:0px;">
+			<div class="col-md-8" style="height:91vh; background:white; padding:0px;">
 				<div id="Table1" class="tr05">
 					<style>
 						/*.red{
@@ -129,34 +129,43 @@
 							height: 1.2em;
 							overflow: hidden;
 						}
+
 						@keyframes tored {
 							100% {color: red}
 						}
 
 						#Table1 .red{
-							animation-name: tored;
+							transition: color 1s;
+							color: red;
+							/*animation-name: tored;
 							animation-duration: 1s;
-							animation-fill-mode:forwards;
+							animation-fill-mode:forwards;*/
 						}
 						@keyframes togreen {
 							100% {color: green}
 						}
 
 						#Table1 .green{
-							animation-name: togreen;
+							transition: color 1s;
+							color: green;
+							/*animation-name: togreen;
 							animation-duration: 1s;
-							animation-fill-mode:forwards;
+							animation-fill-mode:forwards;*/
 						}
 						@keyframes togold {
 							100% {color:gold}
 						}
 
 						#Table1 .gold{
-							animation-name: togold;
+							transition: color 1s;
+							color: green;
+							/*animation-name: togold;
 							animation-duration: 1s;
-							animation-fill-mode:forwards;
+							animation-fill-mode:forwards;*/
 						}
+						.nano-content{
 
+						}
 					</style>
 							<div class="div-one" style="width:45%; padding-left:20px;">
 								<p class="paragraf-one">AGENT NAME</p>
@@ -167,8 +176,10 @@
 							<div class="div-one" style="width:25%;">
 								<p class="paragraf-one">AUX</p>
 							</div>
-
 					<style type="text/css">
+						#Table1 tbody:hover{
+							sc
+						}
 						.tr05 .rel{
 							position: relative;
 
@@ -316,8 +327,7 @@
 
 
 				</div>
-
-				<div class="col-md-4" style="padding: 0" >
+			<div class="col-md-4" style="padding: 0" >
 					<div style="height:40vh; background:black; padding:0px; margin: 0">
 							<div class="div-one" style="width:100%; ; border-bottom:3px solid #000000!important;">
 								<p class="paragraf-one">REALTIME STATS</p>
@@ -419,16 +429,11 @@
 					</table>
 				</div>
 				</div>
-
-
 			<div class="col-md-12 div-two">
 				<div id="roller" class="div-foor" style="text-align:center">
 					<nobr class="paragraf-two">&nbsp;</nobr>
 				</div>
 			</div>
-
-
-
 			<script type="text/javascript">
 
 
@@ -555,6 +560,32 @@
 					var El=document.getElementsByClassName("icon")[0].getElementsByTagName("div")[0];
 					El.className="fa "+name;
 					console.log(El.className);
+				}
+				function AutoScroller(Selector, Interval, Step) {
+					var _this=this;
+					this.Element=$(Selector)[0];
+					this.TimerId;
+					this.Step=Step;
+					this.Interval=Interval
+					this.IsRun=false;
+					this.Start=function(){
+						this.TimerId=setInterval(function (){
+							var Top=_this.Element.scrollTop;
+							_this.IsRun=true;
+							_this.Element.scrollTop= _this.Element.scrollTop+_this.Step;
+
+							if(Top+_this.Step !=_this.Element.scrollTop){
+								_this.Step*=-1;
+							}
+						}, Interval);
+					}
+					this.Stop=function(){
+						clearInterval(this.TimerId);
+						this.IsRun=false;
+						this.Step=Math.abs(this.Step);
+					}
+					_this.Element.onmouseenter=_this.Stop;
+					_this.Element.onmouseleave=_this.Start;
 				}
 
 			</script>

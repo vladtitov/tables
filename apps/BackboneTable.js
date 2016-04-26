@@ -24,9 +24,9 @@ var AgentM = (function (_super) {
             id: 0,
             fa: '',
             icon: '',
-            iconold: '',
             name: '',
             time: 0,
+            time_color: '',
             aux: ''
         };
     };
@@ -40,13 +40,18 @@ var Row = (function (_super) {
         this.model.bind('change:icon', function () { return _this.changeIcon1(); });
         this.model.bind('change:aux', function () { return _this.changeAux(); });
         this.model.bind('change:time', function () { return _this.onTimeChange(); });
+        this.model.bind('change:time_color', function () { return _this.onTimeColorChange(); });
         this.model.bind('destroy', function () { return _this.destroy(); });
         this.model.bind('remove', function () { return _this.remove(); });
         //  this.model.bind('add',()=>this.add());
     }
     Row.prototype.onTimeChange = function () {
-        var TimeDiv = this.$time;
+        var TimeSpan = this.$time;
         this.time = this.model.get("time");
+    };
+    Row.prototype.onTimeColorChange = function () {
+        var TimeSpan = this.$time;
+        TimeSpan.removeClass().addClass(this.model.get("time_color"));
     };
     Row.prototype.changeAux = function () {
         // var newclass:string = this.model.get('')
@@ -62,9 +67,9 @@ var Row = (function (_super) {
         setTimeout(function () {
             old.remove();
         }, 2000);
-        var newdiv = $('<div>').addClass('new in fa fa-' + this.model.get('fa')).appendTo($icon);
+        var newdiv = $('<div>').addClass('in fa fa-' + this.model.get('fa')).appendTo($icon);
         setTimeout(function () {
-            newdiv.removeClass('new in');
+            newdiv.removeClass('in');
         }, 10);
     };
     Row.prototype.initialize = function () {
