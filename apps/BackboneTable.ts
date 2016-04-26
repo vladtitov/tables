@@ -10,6 +10,7 @@ class VOAgent{
     name:string;
     time:number;
     aux:string;
+
     constructor(obj:any){
         for (var s in obj)this[s]=obj[s];
     }
@@ -17,12 +18,22 @@ class VOAgent{
 }
 
 class AgentM extends Backbone.Model{
+    stamp:number;
+    id:number;
+    fa:string;
+    icon:string;
+    iconold:string;
+    name:string;
+    time:number;
+    aux:string;
 
-    defaults():VOAgent{
+    defaults():any{
         return {
             stamp:0,
-            id:3,
+            id:0,
             fa:'',
+            icon:'',
+            iconold:'',
             name:'',
             time:0,
             aux:''
@@ -36,9 +47,10 @@ class Row extends Backbone.View<AgentM>{
     template:(data:any)=>string;
     model:AgentM;
     static template:any
-    $icon:JQuery
-    $name:JQuery;
-    isInit:boolean
+   /* $icon:JQuery;
+    $name:JQuery;*/
+    isInit:boolean;
+    Icon:HTMLDivElement;
     
     constructor(options:any){
         super(options);
@@ -50,17 +62,38 @@ class Row extends Backbone.View<AgentM>{
     }
 
     private initMe():void{
-        this.$el.html(Row.template(this.model.toJSON()));
-        this.$icon= this.$el.find('.icon');
+        this.Icon= this.$el.find('.icon:first').get();
         
     }
     render() {
-        if(!this.isInit)this.initMe();
-        this.$icon.attr('class',this.model.get('icon'));
+        //if(!this.isInit)this.initMe();
+        //this.$icon.attr('class',this.model.get('icon'));
        // console.log(this.model);
+
+
+        this.changeIcon1();
+        this.$el.html(Row.template(this.model.toJSON()));
         
 
         return this;
+    }
+
+    private icon1:string='';
+    private changeIcon1(){
+      // console.log(this.model.get('fa'))
+
+
+        this.model.set('iconold','out '+this.icon1);
+        this.icon1 = 'fa fa-'+ this.model.get('fa');
+        this.model.set('icon','in '+this.icon1);
+    }
+    private changeIcon2(){
+
+
+    }
+    private changeIcon3(){
+
+
     }
 
     remove():Row{
@@ -98,30 +131,31 @@ class AgentsC extends Backbone.Collection<AgentM>{
         this.params = options.params;
         this.fetch({data:this.params});
         console.log(this.params);
-        setInterval(()=> {
+        /*setInterval(()=> {
             this.fetch({data:this.params});
-        }, 5000);
+        }, 5000);*/
     }
     parse(res:any){
-       /// console.log(res);
+        console.log(res);
 
         var d:string = res.stamp;
         this.params.date=d.replace(' ','T');
-        var stamp:number = Date.now();
-        var ar:any[]= res.result.list;
-        var out:VOAgent[]
+      //  var stamp:number = Date.now();
+      //  var ar:any[]= res.result.list;
+       // var out:VOAgent[]
 
-   out =  _.map(res.result.list,function(item:any){
+ /*  out =  _.map(res.result.list,function(item:any){
                  //item.stamp = stamp;
+
                  item.icon = 'fa fa-'+ item.fa;
        return new VOAgent(item);
-     });
+     });*/
 
 
 
     // console.log(res.result.list.length);
     // console.log(out);
-    return out;
+    return res.result.list;
 }
     //parse:(data)=>{ }
 }

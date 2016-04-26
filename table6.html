@@ -15,14 +15,29 @@
 		<script src="libs/underscore-min.js"></script>
 		<script  src="libs/backbone-min.js"></script>
 		<script src="libs/moment.min.js"></script>
-		<script src="libs/jquery.nanoscroller.min.js"></script>
+		<!--<script src="libs/jquery.nanoscroller.min.js"></script>-->
 		<link href="css/mystyle.css" rel="stylesheet">
+		<style type="text/css">
+			.tr05 .fa{
+				transition: transform 0.3s;
+				}
+			.prev{
+				transform:rotateX(-90deg);
+
+			}
+			.next{
+				transform:rotateX(0deg);
+
+			}
+
+
+		</style>
 	</head>
 
 	<body>
 		<div class="">
 				<div class="col-md-8" style="height:91vh; background:white; padding:0px;">
-				<div id="Table1">
+				<div id="Table1" class="tr05">
 					<style>
 						/*.red{
 							color: red;
@@ -153,14 +168,37 @@
 								<p class="paragraf-one">AUX</p>
 							</div>
 
+					<style type="text/css">
+						.tr05 .fa{
+							transition: transform 0.3s;
+						}
+						.tr05 .fa.in{
+							transform:translateY(100%);
+						}
+						.tr05 .fa.out{
+							transform:translateY(-100%);
+						}
+						.prev{
+							transform:rotateX(-90deg);
+
+						}
+						.next{
+							transform:rotateX(0deg);
+
+						}
+
+
+					</style>
 					<div class="nano">
-						<div class="nano-content">
+						<div class="nano-content" data-color="white">
 
 							<!--Template Row start -->
 							<script id="row-template" type="text/template" data-id="template">
 								<td class="td0">
-									<div class="icon" ><div class="<%=oldicon%>"  data-id="icon"></div></div>
-									<div class="icon" ><div class="<%=icon%>"  data-id="icon"></div></div>
+									<div class="icon" >
+										<div class="<%=iconold%>"  data-id="icon"></div>
+										<div class="<%=icon%>"  data-id="icon"></div>
+									</div>
 								</td>
 								<td class="td1">
 									<span data-id="name"><%=name%></span>
@@ -326,6 +364,8 @@
 				</div>
 			</div>
 
+
+
 			<script type="text/javascript">
 
 
@@ -438,6 +478,22 @@
 					sendGetQueryTable3 ();
 
 				}
+
+
+//Tests
+				function SetIcon(name, NewText) {
+					var El=document.getElementsByClassName("icon")[0].getElementsByTagName("div")[0];
+					El.addEventListener('transitionend',function (){TransformToNormal(name)});
+					El.className +=" prev";
+
+				}
+				function TransformToNormal(name, NewText){
+					console.log("TransformToNormal");
+					var El=document.getElementsByClassName("icon")[0].getElementsByTagName("div")[0];
+					El.className="fa "+name;
+					console.log(El.className);
+				}
+
 			</script>
 
 

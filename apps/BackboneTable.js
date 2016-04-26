@@ -21,8 +21,10 @@ var AgentM = (function (_super) {
     AgentM.prototype.defaults = function () {
         return {
             stamp: 0,
-            id: 3,
+            id: 0,
             fa: '',
+            icon: '',
+            iconold: '',
             name: '',
             time: 0,
             aux: ''
@@ -35,21 +37,32 @@ var Row = (function (_super) {
     function Row(options) {
         var _this = this;
         _super.call(this, options);
+        this.icon1 = '';
         this.model.bind('change', function () { return _this.render(); });
         this.model.bind('destroy', function () { return _this.destroy(); });
         this.model.bind('remove', function () { return _this.remove(); });
         //  this.model.bind('add',()=>this.add());
     }
     Row.prototype.initMe = function () {
-        this.$el.html(Row.template(this.model.toJSON()));
-        this.$icon = this.$el.find('.icon');
+        this.Icon = this.$el.find('.icon:first').get();
     };
     Row.prototype.render = function () {
-        if (!this.isInit)
-            this.initMe();
-        this.$icon.attr('class', this.model.get('icon'));
+        //if(!this.isInit)this.initMe();
+        //this.$icon.attr('class',this.model.get('icon'));
         // console.log(this.model);
+        this.changeIcon1();
+        this.$el.html(Row.template(this.model.toJSON()));
         return this;
+    };
+    Row.prototype.changeIcon1 = function () {
+        // console.log(this.model.get('fa'))
+        this.model.set('iconold', 'out ' + this.icon1);
+        this.icon1 = 'fa fa-' + this.model.get('fa');
+        this.model.set('icon', 'in ' + this.icon1);
+    };
+    Row.prototype.changeIcon2 = function () {
+    };
+    Row.prototype.changeIcon3 = function () {
     };
     Row.prototype.remove = function () {
         var _this = this;
@@ -76,32 +89,32 @@ var AppModel = (function (_super) {
 var AgentsC = (function (_super) {
     __extends(AgentsC, _super);
     function AgentsC(options) {
-        var _this = this;
         _super.call(this, options);
         this.model = AgentM;
         this.url = options.url;
         this.params = options.params;
         this.fetch({ data: this.params });
         console.log(this.params);
-        setInterval(function () {
-            _this.fetch({ data: _this.params });
-        }, 5000);
+        /*setInterval(()=> {
+            this.fetch({data:this.params});
+        }, 5000);*/
     }
     AgentsC.prototype.parse = function (res) {
-        /// console.log(res);
+        console.log(res);
         var d = res.stamp;
         this.params.date = d.replace(' ', 'T');
-        var stamp = Date.now();
-        var ar = res.result.list;
-        var out;
-        out = _.map(res.result.list, function (item) {
-            //item.stamp = stamp;
-            item.icon = 'fa fa-' + item.fa;
-            return new VOAgent(item);
-        });
+        //  var stamp:number = Date.now();
+        //  var ar:any[]= res.result.list;
+        // var out:VOAgent[]
+        /*  out =  _.map(res.result.list,function(item:any){
+                        //item.stamp = stamp;
+       
+                        item.icon = 'fa fa-'+ item.fa;
+              return new VOAgent(item);
+            });*/
         // console.log(res.result.list.length);
         // console.log(out);
-        return out;
+        return res.result.list;
     };
     return AgentsC;
 }(Backbone.Collection));
