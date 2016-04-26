@@ -435,7 +435,7 @@
 				</div>
 			</div>
 			<script type="text/javascript">
-
+				var autoScroller=new AutoScroller(".nano-content",40,1);
 
 				window.onload = function () {
 					var paragraphs = $("nobr");
@@ -545,6 +545,9 @@
 					sendGetQueryTable2 ();
 					sendGetQueryTable3 ();
 
+					//Подключаем автоскроллер
+
+					autoScroller.Start();
 				}
 
 
@@ -564,12 +567,13 @@
 				function AutoScroller(Selector, Interval, Step) {
 					var _this=this;
 					this.Element=$(Selector)[0];
-					this.TimerId;
+					this.TimerId=5;
 					this.Step=Step;
-					this.Interval=Interval
+					this.Interval=Interval;
 					this.IsRun=false;
 					this.Start=function(){
-						this.TimerId=setInterval(function (){
+						clearInterval(_this.TimerId);
+						_this.TimerId=setInterval(function (){
 							var Top=_this.Element.scrollTop;
 							_this.IsRun=true;
 							_this.Element.scrollTop= _this.Element.scrollTop+_this.Step;
@@ -580,9 +584,9 @@
 						}, Interval);
 					}
 					this.Stop=function(){
-						clearInterval(this.TimerId);
-						this.IsRun=false;
-						this.Step=Math.abs(this.Step);
+						clearInterval(_this.TimerId);
+						_this.IsRun=false;
+						_this.Step=Math.abs(_this.Step);
 					}
 					_this.Element.onmouseenter=_this.Stop;
 					_this.Element.onmouseleave=_this.Start;
