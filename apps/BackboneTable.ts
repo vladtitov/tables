@@ -2,76 +2,11 @@
 ///<reference path="../typings/underscore.d.ts"/>
 ///<reference path="../typings/backbone-global.d.ts"/>
 
-module table1 {
-  export  class VOAgent {
-        stamp:number;
-        id:number;
-        fa:string;
-        name:string;
-        time:number;
-        aux:string;
-    }
-   export class AgentModel extends Backbone.Model {
-
-        defaults():VOAgent {
-            return {
-                stamp: 0,
-                id: 3,
-                fa: '',
-                name: '',
-                time: 0,
-                aux: ''
-            }
-        }
-    }
-
-
-    class RowView extends Backbone.View<AgentModel> {
-        template:(data:any)=>string;
-        model:AgentModel;
-        static template:any
-
-        constructor(options:any) {
-            super(options);
-            this.model.bind('change', ()=>this.render());
-            this.model.bind('destroy', ()=>this.destroy());
-            this.model.bind('remove', ()=>this.remove());
-            //  this.model.bind('add',()=>this.add());
-        }
-
-        render() {
-            // console.log(this.model);
-            this.$el.html(RowView.template(this.model.toJSON()));
-
-            return this;
-        }
-
-        remove():RowView {
-            this.$el.fadeOut(()=> {
-                super.remove();
-            })
-            return this;
-
-        }
-
-        add():void {
-            console.log('add');
-        }
-
-        destroy():void {
-            console.log('destroy');
-        }
-
-
-    }
-
-    /*class AppModel extends Backbone.Model {
-
-
-    }*/
-
-   export class AgentsCollection extends Backbone.Collection<AgentModel> {
-        model = AgentModel;
+module table1 { 
+   import AgentModel = table.AgentModel;
+    
+    export class AgentsCollection extends Backbone.Collection<AgentModel> {
+        model:AgentModel = AgentModel;
         data:any;
         params:any;
 

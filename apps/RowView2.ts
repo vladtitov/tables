@@ -6,9 +6,11 @@
 
 module table2{
 
-    class Row extends Backbone.View<AgentM>{
+    import AgentModel = table1.AgentModel;
+
+    class RowView extends Backbone.View<AgentModel>{
         template:(data:any)=>string;
-        model:AgentM;
+        model:AgentModel;
         static template:any
         /* $icon:JQuery;
          $name:JQuery;*/
@@ -67,7 +69,7 @@ module table2{
 
         }
         initialize(){
-            this.$el.html(Row.template(this.model.toJSON()));
+            this.$el.html(RowView.template(this.model.toJSON()));
             this.$icon = this.$el.find('.icon').first();
             this.$aux = this.$el.find('.aux').first();
             this.$time = this.$el.find('.td2>span').first();
@@ -108,7 +110,7 @@ module table2{
 
         }
 
-        remove():Row{
+        remove():RowView{
             this.$el.fadeOut(()=>{
                 super.remove();
             })
