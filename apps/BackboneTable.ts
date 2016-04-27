@@ -3,9 +3,7 @@
 ///<reference path="../typings/backbone-global.d.ts"/>
 
 module table1 {
-
-
-    class VOAgent {
+  export  class VOAgent {
         stamp:number;
         id:number;
         fa:string;
@@ -13,7 +11,7 @@ module table1 {
         time:number;
         aux:string;
     }
-    class AgentM extends Backbone.Model {
+   export class AgentModel extends Backbone.Model {
 
         defaults():VOAgent {
             return {
@@ -28,9 +26,9 @@ module table1 {
     }
 
 
-    class RowView extends Backbone.View<AgentM> {
+    class RowView extends Backbone.View<AgentModel> {
         template:(data:any)=>string;
-        model:AgentM;
+        model:AgentModel;
         static template:any
 
         constructor(options:any) {
@@ -67,13 +65,13 @@ module table1 {
 
     }
 
-    class AppModel extends Backbone.Model {
+    /*class AppModel extends Backbone.Model {
 
 
-    }
+    }*/
 
-   export class AgentsCollection extends Backbone.Collection<AgentM> {
-        model = AgentM;
+   export class AgentsCollection extends Backbone.Collection<AgentModel> {
+        model = AgentModel;
         data:any;
         params:any;
 

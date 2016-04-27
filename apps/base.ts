@@ -5,6 +5,9 @@
 ///<reference path="../typings/underscore.d.ts"/>
     ///<reference path="../typings/require.d.ts"/>
     ///<reference path="../typings/backbone-global.d.ts"/>
+///<reference path="BackboneTable.ts"/>
+///<reference path="RowView.ts"/>
+
 
 
 

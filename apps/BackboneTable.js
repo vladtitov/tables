@@ -13,12 +13,13 @@ var table1;
         }
         return VOAgent;
     }());
-    var AgentM = (function (_super) {
-        __extends(AgentM, _super);
-        function AgentM() {
+    table1.VOAgent = VOAgent;
+    var AgentModel = (function (_super) {
+        __extends(AgentModel, _super);
+        function AgentModel() {
             _super.apply(this, arguments);
         }
-        AgentM.prototype.defaults = function () {
+        AgentModel.prototype.defaults = function () {
             return {
                 stamp: 0,
                 id: 3,
@@ -28,8 +29,9 @@ var table1;
                 aux: ''
             };
         };
-        return AgentM;
+        return AgentModel;
     }(Backbone.Model));
+    table1.AgentModel = AgentModel;
     var RowView = (function (_super) {
         __extends(RowView, _super);
         function RowView(options) {
@@ -60,19 +62,16 @@ var table1;
         };
         return RowView;
     }(Backbone.View));
-    var AppModel = (function (_super) {
-        __extends(AppModel, _super);
-        function AppModel() {
-            _super.apply(this, arguments);
-        }
-        return AppModel;
-    }(Backbone.Model));
+    /*class AppModel extends Backbone.Model {
+
+
+    }*/
     var AgentsCollection = (function (_super) {
         __extends(AgentsCollection, _super);
         function AgentsCollection(options) {
             var _this = this;
             _super.call(this, options);
-            this.model = AgentM;
+            this.model = AgentModel;
             this.url = options.url;
             this.params = options.params;
             this.fetch({ data: this.params });
