@@ -101,8 +101,9 @@ var table1;
         function TableView(options) {
             var _this = this;
             _super.call(this, options);
-            this.setElement($("#TableList"), true);
-            RowView.template = _.template($('#row-template').html());
+            this.container = $(options.container);
+            this.setElement(this.container.find('tbody').first(), true);
+            RowView.template = _.template($(options.rowTempalete).html());
             // collection.bind('reset', this.render);
             this.collection = options.collection;
             this.collection.bind('remove', function (evt) {

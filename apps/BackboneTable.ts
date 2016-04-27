@@ -109,11 +109,13 @@ module table1 {
     export class TableView extends Backbone.View<AppModel> {
         collectionAgentsC;
 
+        container:JQuery;
+
         constructor(options) {
             super(options);
-            this.setElement($("#TableList"), true);
-            RowView.template = _.template($('#row-template').html());
-
+            this.container = $(options.container);
+            this.setElement(this.container.find('tbody').first(), true);
+            RowView.template = _.template($(options.rowTempalete).html());
             // collection.bind('reset', this.render);
             this.collection = options.collection;
             this.collection.bind('remove', (evt)=> {

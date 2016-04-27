@@ -11,6 +11,10 @@ $(document).ready(function(){
         }
     });
 
-    var t = new table1.TableView({collection:collection });
+    var t = new table1.TableView({
+        container:'#Table1',
+        rowTempalete:'#row-template',
+        collection:collection
+    });
 
 })

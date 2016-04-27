@@ -1,0 +1,122 @@
+/*.red{
+                        color: red;
+                    }*/
+/*.green{
+    color: green;
+}
+.gold{
+    color: goldenrod;
+}
+*/
+#Table1{
+    height:91vh;
+    background:white;
+    padding:0px;
+}
+#Table1 tr{
+    font-family:Calibri;
+    font-weight:bolder;
+    font-size: xx-large;
+
+}
+#Table1 .col0{
+    width:5%;
+}
+#Table1 .col1{
+    width:50%;
+    padding-left:15px;
+}
+#Table1 .col2{
+    width:20%;
+    padding-left:10px;
+
+}
+#Table1 .col3{
+    width:25%;
+    padding-left:10px;
+}
+#Table1 .nano{
+    height: 81vh;
+    /*overflow-y: auto;*/
+}
+#Table1 table>tbody>tr:nth-child(odd) td {
+    background: none repeat scroll 0 0 #B5DFFE;
+
+}
+#Table1 table>tbody>tr:nth-child(even) td {
+    background-color:#EBF6FF;
+
+}
+#Table1 .fa{
+    width: 1em;
+    display:block;
+    text-align: center;
+}
+#Table1 .fa-phone{
+    color: green;
+}
+#Table1 .fa-coffee{
+    color: goldenrod;
+}
+
+#Table1 .fa-minus-circle{
+    color: red;
+}
+#Table1 .fa-user{
+    color: #358076;
+}
+#Table1 .fa-users{
+    color: #106780;
+}
+#Table1 td{
+    border-right:3px solid #ffffff;
+    border-left:3px solid #ffffff;
+}
+#Table1 .icon{
+    /*position: relative;*/
+    width: 1em;
+    height: 1em;
+    display: block;
+    overflow: hidden;
+
+}
+#Table1 .icon>div{
+    /*	position:absolute;
+        left: 0;
+        top: 0;
+        width: 1em;
+        height: 1em;*/
+
+}
+
+#Table1 .animation{
+    height: 1.2em;
+    overflow: hidden;
+}
+@keyframes tored {
+    100% {color: red}
+}
+
+#Table1 .red{
+    animation-name: tored;
+    animation-duration: 1s;
+    animation-fill-mode:forwards;
+}
+@keyframes togreen {
+    100% {color: green}
+}
+
+#Table1 .green{
+    animation-name: togreen;
+    animation-duration: 1s;
+    animation-fill-mode:forwards;
+}
+@keyframes togold {
+    100% {color:gold}
+}
+
+#Table1 .gold{
+    animation-name: togold;
+    animation-duration: 1s;
+    animation-fill-mode:forwards;
+}
