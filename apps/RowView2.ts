@@ -4,11 +4,11 @@
     ///<reference path="base.ts"/>
 
 
-module table2{
+module v2{
 
-    import AgentModel = table1.AgentModel;
+    import AgentModel = table.AgentModel;
 
-    class RowView extends Backbone.View<AgentModel>{
+    export class RowView extends Backbone.View<AgentModel>{
         template:(data:any)=>string;
         model:AgentModel;
         static template:any

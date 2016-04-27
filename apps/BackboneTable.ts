@@ -1,14 +1,14 @@
-///<reference path="../typings/jquery.d.ts"/>
-///<reference path="../typings/underscore.d.ts"/>
-///<reference path="../typings/backbone-global.d.ts"/>
+///<reference path="base.ts"/>
+
 
 module table1 { 
    import AgentModel = table.AgentModel;
+    import RowView = v2.RowView;
     
     export class AgentsCollection extends Backbone.Collection<AgentModel> {
-        model:AgentModel = AgentModel;
+        model:any = AgentModel;
         data:any;
-        params:any;
+        params:any;         
 
         constructor(options:any) {
             super(options)
@@ -39,7 +39,7 @@ module table1 {
     }
 
 
-    export class TableView extends Backbone.View<AppModel> {
+    export class TableView extends Backbone.View<AgentModel> {
         collectionAgentsC;
 
         container:JQuery;

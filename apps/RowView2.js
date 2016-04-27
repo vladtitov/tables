@@ -7,8 +7,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var table2;
-(function (table2) {
+var v2;
+(function (v2) {
     var RowView = (function (_super) {
         __extends(RowView, _super);
         function RowView(options) {
@@ -94,5 +94,6 @@ var table2;
         };
         return RowView;
     }(Backbone.View));
-})(table2 || (table2 = {}));
+    v2.RowView = RowView;
+})(v2 || (v2 = {}));
 //# sourceMappingURL=RowView2.js.map

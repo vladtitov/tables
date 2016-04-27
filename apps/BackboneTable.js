@@ -1,6 +1,4 @@
-///<reference path="../typings/jquery.d.ts"/>
-///<reference path="../typings/underscore.d.ts"/>
-///<reference path="../typings/backbone-global.d.ts"/>
+///<reference path="base.ts"/>
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -9,6 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var table1;
 (function (table1) {
     var AgentModel = table.AgentModel;
+    var RowView = v2.RowView;
     var AgentsCollection = (function (_super) {
         __extends(AgentsCollection, _super);
         function AgentsCollection(options) {

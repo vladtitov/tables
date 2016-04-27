@@ -4,6 +4,7 @@
     ///<reference path="base.ts"/>
 
 module table{
+
     export  class VOAgent {
         stamp:number;
         id:number;
@@ -12,6 +13,8 @@ module table{
         time:number;
         aux:string;
     }
+
+
     export class AgentModel extends Backbone.Model {
 
         defaults():VOAgent {

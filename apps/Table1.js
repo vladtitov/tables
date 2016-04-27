@@ -1,6 +1,7 @@
 /**
  * Created by Vlad on 4/27/2016.
  */
+///<reference path="base.ts"/>
 $(document).ready(function () {
     var collection = new table1.AgentsCollection({
         url: 'http://callcenter.front-desk.ca/service/get-agents-all',

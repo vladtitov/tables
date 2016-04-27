@@ -3,10 +3,14 @@
  */
     ///<reference path="base.ts"/>
 
-module table1{
+
+module v1{
+
+    import AgentModel = table.AgentModel
+
   export  class RowView extends Backbone.View<AgentModel> {
         template:(data:any)=>string;
-        model:AgentModel;
+        model:AgentModel
         static template:any
 
         constructor(options:any) {
