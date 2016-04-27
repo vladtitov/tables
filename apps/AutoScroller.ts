@@ -1,6 +1,8 @@
 /**
  * Created by MERDOCK on 27.04.2016.
  */
+    ///<reference path="base.ts"/>
+
 
 class AutoScroller{
     private IsRun:boolean;

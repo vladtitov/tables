@@ -1,6 +1,7 @@
 /**
  * Created by MERDOCK on 27.04.2016.
  */
+///<reference path="base.ts"/>
 var AutoScroller = (function () {
     function AutoScroller(Selector, Interval, Step) {
         var _this = this;
