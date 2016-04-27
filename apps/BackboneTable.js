@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var table1;
 (function (table1) {
     var AgentModel = table.AgentModel;
-    var RowView = v2.RowView;
+    var RowView = v1.RowView;
     var AgentsCollection = (function (_super) {
         __extends(AgentsCollection, _super);
         function AgentsCollection(options) {

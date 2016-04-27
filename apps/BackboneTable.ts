@@ -3,7 +3,7 @@
 
 module table1 { 
    import AgentModel = table.AgentModel;
-    import RowView = v2.RowView;
+    import RowView = v1.RowView;
     
     export class AgentsCollection extends Backbone.Collection<AgentModel> {
         model:any = AgentModel;
