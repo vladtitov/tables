@@ -1,13 +1,4 @@
-/*.red{
-                        color: red;
-                    }*/
-/*.green{
-    color: green;
-}
-.gold{
-    color: goldenrod;
-}
-*/
+
 #Table1{
     height:91vh;
     background:white;
@@ -124,51 +115,40 @@
 #Table1 tbody:hover{
 
 }
-.tr05 .rel{
+#Table1 .rel{
     position: relative;
 
 }
-.tr05 .rel>div{
+#Table1 .rel>div{
     position: absolute;
-
 }
 
-.tr05 .aux{
+#Table1 .aux{
     height:1.2em;
     overflow: hidden;
+}
+
+#Table1 .aux>div{
 
 }
-.tr05 .aux>div{
-
-}
-.tr05 .fa, .tr05 .trans{
+#Table1 .fa{
     transition: transform 0.5s;
     transform:translateY(0);
 }
-.tr05 .in.trans{
-    transform:translateY(100%);
-}
-.tr05 .out.trans{
-    transform:translateY(-100%);
-}
-.tr05 .in{
-    transform:translateY(100%);
-}
-.tr05 .out{
-    transform:translateY(-100%);
-}
-/*.tr06 .new{
-    transform:translateY(100%);
-}
-.
-.tr06 .out.go{
+
+#Table1 .trans{
+    transition: transform 0.5s;
     transform:translateY(0);
-}*/
-.prev{
-    transform:rotateX(-90deg);
-
 }
-.next{
-    transform:rotateX(0deg);
-
+#Table1 .in.trans{
+    transform:translateY(100%);
+}
+#Table1 .out.trans{
+    transform:translateY(-100%);
+}
+#Table1 .in{
+    transform:translateY(100%);
+}
+#Table1 .out{
+    transform:translateY(-100%);
 }

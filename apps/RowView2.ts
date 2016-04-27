@@ -19,7 +19,9 @@ module v2{
         Icon:HTMLDivElement;
 
         private $icon:JQuery;
+        private $icon_child:JQuery;
         private $aux:JQuery;
+        private $aux_child;
         private $time:JQuery;
         private time:number;
         constructor(options:any){
@@ -44,34 +46,36 @@ module v2{
         private onTimeColorChange():void{
             var TimeSpan:JQuery=this.$time;
             TimeSpan.removeClass().addClass(this.model.get("time_color"));
-
         }
 
         private changeAux():void{
-            // var newclass:string = this.model.get('')
-            // this.$aux;
-            var old:JQuery = this.$aux.children(0).addClass('out');
+            var old:JQuery = this.$aux_child.addClass('out');
             var n:JQuery = $('<div>').addClass('trans in').html(this.model.get('aux')).appendTo(this.$aux);
             setTimeout(function(){ n.removeClass('in')},10);
             setTimeout(function(){old.remove()},2000);
+            this.$aux_child=n;
         }
 
         changeIcon1():void{
             var $icon:JQuery = this.$icon;
-            var old = $icon.children().addClass('out');
+            var old = this.$icon_child.addClass('out');
             setTimeout(function(){
-                old.remove();
-            },2000)
+                    old.remove();
+                },2000);
+
             var newdiv= $('<div>').addClass('in fa fa-'+this.model.get('fa')).appendTo($icon);
             setTimeout(function (){
                 newdiv.removeClass('in');
             },10);
-
+            this.$icon_child = newdiv;
         }
+
         initialize(){
             this.$el.html(RowView.template(this.model.toJSON()));
             this.$icon = this.$el.find('.icon').first();
+            this.$icon_child = this.$icon.children();
             this.$aux = this.$el.find('.aux').first();
+            this.$aux_child =  this.$aux.children();
             this.$time = this.$el.find('.td2>span').first();
 
 

@@ -31,16 +31,15 @@ var v2;
             TimeSpan.removeClass().addClass(this.model.get("time_color"));
         };
         RowView.prototype.changeAux = function () {
-            // var newclass:string = this.model.get('')
-            // this.$aux;
-            var old = this.$aux.children(0).addClass('out');
+            var old = this.$aux_child.addClass('out');
             var n = $('<div>').addClass('trans in').html(this.model.get('aux')).appendTo(this.$aux);
             setTimeout(function () { n.removeClass('in'); }, 10);
             setTimeout(function () { old.remove(); }, 2000);
+            this.$aux_child = n;
         };
         RowView.prototype.changeIcon1 = function () {
             var $icon = this.$icon;
-            var old = $icon.children().addClass('out');
+            var old = this.$icon_child.addClass('out');
             setTimeout(function () {
                 old.remove();
             }, 2000);
@@ -48,12 +47,15 @@ var v2;
             setTimeout(function () {
                 newdiv.removeClass('in');
             }, 10);
+            this.$icon_child = newdiv;
         };
         RowView.prototype.initialize = function () {
             var _this = this;
             this.$el.html(RowView.template(this.model.toJSON()));
             this.$icon = this.$el.find('.icon').first();
+            this.$icon_child = this.$icon.children();
             this.$aux = this.$el.find('.aux').first();
+            this.$aux_child = this.$aux.children();
             this.$time = this.$el.find('.td2>span').first();
             //d.setUTCSeconds(this.model.get("time"));
             setInterval(function () {
