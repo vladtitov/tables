@@ -15,6 +15,7 @@
 		<script src="libs/underscore-min.js"></script>
 		<script  src="libs/backbone-min.js"></script>
 		<script src="libs/moment.min.js"></script>
+		<script  src="apps/MovingTextRow.js"></script>
 		<!--<script src="libs/jquery.nanoscroller.min.js"></script>-->
 		<link href="css/mystyle.css" rel="stylesheet">
 		<style type="text/css">
@@ -36,6 +37,7 @@
 
 	<body>
 		<div class="">
+			<!--Таблица-->
 			<div class="col-md-8" style="height:91vh; background:white; padding:0px;">
 				<div id="Table1" class="tr05">
 					<style>
@@ -327,6 +329,7 @@
 
 
 				</div>
+			<!--Статистика-->
 			<div class="col-md-4" style="padding: 0" >
 					<div style="height:40vh; background:black; padding:0px; margin: 0">
 							<div class="div-one" style="width:100%; ; border-bottom:3px solid #000000!important;">
@@ -429,15 +432,18 @@
 					</table>
 				</div>
 				</div>
+			<!--Бегущая строка-->
 			<div class="col-md-12 div-two">
-				<div id="roller" class="div-foor" style="text-align:center">
-					<nobr class="paragraf-two">&nbsp;</nobr>
+				<div id="roller" class="div-foor" style="">
+					<nobr class="paragraf-two" style="display:none;">&nbsp;</nobr>
+					<marquee data-rc="MovingTextRow" scrollamount="2" scrolldelay="30" truespeed ></marquee>
 				</div>
 			</div>
+
+			<!--Подключение автоскроллера-->
 			<script src="apps/AutoScroller.js"></script>
 			<script type="text/javascript">
-				var autoScroller=new AutoScroller(".nano-content",40,1);
-
+				var autoScroller=new AutoScroller(".nano-content",40,1); //Подключение автоскроллера
 				window.onload = function () {
 					var paragraphs = $("nobr");
 					var speedlimit=2000;
@@ -546,13 +552,14 @@
 					sendGetQueryTable2 ();
 					sendGetQueryTable3 ();
 
-					//Подключаем автоскроллер
 
-					autoScroller.Start();
+
+					autoScroller.Start(); //Запускаем автоскроллер
 				}
+				MTROptions.
 
-
-//Tests
+				//Tests===========================================================
+				//вариант анимации замены иконки
 				function SetIcon(name, NewText) {
 					var El=document.getElementsByClassName("icon")[0].getElementsByTagName("div")[0];
 					El.addEventListener('transitionend',function (){TransformToNormal(name)});
@@ -565,6 +572,8 @@
 					El.className="fa "+name;
 					console.log(El.className);
 				}
+
+				//вариант JavaAutoScrollera
 				function JAutoScroller(Selector, Interval, Step) {
 					var _this=this;
 					this.Element=$(Selector)[0];
