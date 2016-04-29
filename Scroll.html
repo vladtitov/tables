@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="libs/bootstrap.css">
+	<link rel="stylesheet" href="libs/nanoscroller.css">
+	<link rel="stylesheet" href="css/brand.css">
+	<link rel="stylesheet" href="libs/font-awesome.css">
+
+	<script src="libs/jquery-2.1.4.min.js"></script>
+	<script src="libs/underscore-min.js"></script>
+	<script  src="libs/backbone-min.js"></script>
+	<script src="libs/moment.min.js"></script>
+
+	<!--<script src="libs/jquery.nanoscroller.min.js"></script>-->
+	<link href="css/mystyle.css" rel="stylesheet">
+	<style type="text/css">
+		.tr05 .fa{
+			transition: transform 0.3s;
+		}
+		.prev{
+			transform:rotateX(-90deg);
+
+		}
+		.next{
+			transform:rotateX(0deg);
+
+		}
+
+
+	</style>
+</head>
+
+<body>
+<div id="roller" class="div-foor" style="">
+	<marquee data-rc="MovingTextRow" scrollamount="2" scrolldelay="30" truespeed></marquee>
+	<script  src="apps/MovingTextRow.js"></script>
+</div>
+</body>
+</html>

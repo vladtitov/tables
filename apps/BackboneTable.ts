@@ -36,7 +36,7 @@ class Row extends Backbone.View<AgentM>{
 
         this.model.bind('change', ()=>this.render());
         this.model.bind('destroy',()=>this.destroy());
-       this.model.bind('remove',()=>this.remove());
+        this.model.bind('remove',()=>this.remove());
       //  this.model.bind('add',()=>this.add());
     }
 
@@ -55,10 +55,10 @@ class Row extends Backbone.View<AgentM>{
 
     }
     add():void{
-console.log('add');
+        /*console.log('add');*/
     }
     destroy():void{
-        console.log('destroy');
+       /* console.log('destroy');*/
     }
 
 

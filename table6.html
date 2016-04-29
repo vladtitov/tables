@@ -15,7 +15,7 @@
 	<script src="libs/underscore-min.js"></script>
 	<script  src="libs/backbone-min.js"></script>
 	<script src="libs/moment.min.js"></script>
-	<script  src="apps/MovingTextRow.js"></script>
+
 	<!--<script src="libs/jquery.nanoscroller.min.js"></script>-->
 	<link href="css/mystyle.css" rel="stylesheet">
 	<style type="text/css">
@@ -435,8 +435,9 @@
 	<!--Бегущая строка-->
 	<div class="col-md-12 div-two">
 		<div id="roller" class="div-foor" style="">
-			<nobr class="paragraf-two" style="display:none;">&nbsp;</nobr>
-			<marquee data-rc="MovingTextRow" scrollamount="2" scrolldelay="30" truespeed ></marquee>
+			<!--<nobr class="paragraf-two" style="display:none;">&nbsp;</nobr>-->
+			<marquee class="paragraf-two" width="100%" data-rc="MovingTextRow" scrollamount="2" scrolldelay="30" truespeed></marquee>
+			<script  src="apps/MovingTextRow.js"></script>
 		</div>
 	</div>
 
@@ -452,60 +453,6 @@
 			var widthContainer;
 			var speed;
 			var flag = false;
-
-			var scrollforward = function(w,wc,speed){
-				$('#roller nobr').delay(scrolldelay).animate({
-					left:-(w-wc)},speed,function(){
-					if (flag)
-						scrollbackward(w,wc,speed);
-					else
-						return false;
-				});
-			}
-
-			var scrollbackward = function(w,wc,speed){
-				$('#roller nobr').delay(scrolldelay).animate({
-					left:0},speed,function(){
-					if (flag)
-						scrollforward(w,wc,speed);
-					else
-						return false;
-				});
-			}
-
-			function sendGetQuery () {
-				$.ajax({
-					type: "GET",
-					url: "http://front-desk.ca/mi/callcenter/rem/messenger",
-					dataType: "json",
-
-					success: function (obj) {
-						var temp = obj.result;
-						var str = paragraphs.text();
-
-						if(temp !== str){
-							paragraphs.text(temp);
-							$('#roller').html(''+$('#roller').html()+'');
-							$('#roller nobr').css({position:'absolute',left:0,top:0});
-							width=$('#roller nobr').width();
-							widthContainer=$('#roller').width();
-							speed=speedlimit*(width/widthContainer);
-							console.log(speed);
-							speed = 20000;
-
-							if(width>widthContainer){
-								flag = true;
-								scrollforward(width,widthContainer,speed);
-							}
-							else{
-								flag = false;
-								$('#roller nobr').css({position:'relative',left:0,top:0});
-							}
-							setTimeout(sendGetQuery, 2000);
-						}
-					}
-				});
-			}
 
 			function sendGetQueryTable2 () {
 				$.ajax({
@@ -547,10 +494,62 @@
 				});
 			}
 
-
-			sendGetQuery ();
 			sendGetQueryTable2 ();
 			sendGetQueryTable3 ();
+
+			/*var scrollforward = function(w,wc,speed){
+				$('#roller nobr').delay(scrolldelay).animate({
+					left:-(w-wc)},speed,function(){
+					if (flag)
+						scrollbackward(w,wc,speed);
+					else
+						return false;
+				});
+			}
+			var scrollbackward = function(w,wc,speed){
+				$('#roller nobr').delay(scrolldelay).animate({
+					left:0},speed,function(){
+					if (flag)
+						scrollforward(w,wc,speed);
+					else
+						return false;
+				});
+			}
+			function sendGetQuery () {
+				$.ajax({
+					type: "GET",
+					url: "http://front-desk.ca/mi/callcenter/rem/messenger",
+					dataType: "json",
+
+					success: function (obj) {
+						var temp = obj.result;
+						var str = paragraphs.text();
+
+						if(temp !== str){
+							paragraphs.text(temp);
+							$('#roller').html(''+$('#roller').html()+'');
+							$('#roller nobr').css({position:'absolute',left:0,top:0});
+							width=$('#roller nobr').width();
+							widthContainer=$('#roller').width();
+							speed=speedlimit*(width/widthContainer);
+							console.log(speed);
+							speed = 20000;
+
+							if(width>widthContainer){
+								flag = true;
+								scrollforward(width,widthContainer,speed);
+							}
+							else{
+								flag = false;
+								$('#roller nobr').css({position:'relative',left:0,top:0});
+							}
+							setTimeout(sendGetQuery, 2000);
+						}
+					}
+				});
+			}
+			sendGetQuery ();*/
+
 
 
 
