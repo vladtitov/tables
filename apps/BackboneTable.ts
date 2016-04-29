@@ -179,13 +179,13 @@ class AgentsC extends Backbone.Collection<AgentM>{
         this.url = options.url;
         this.params = options.params;
         this.fetch({data:this.params});
-        console.log(this.params);
+       //console.log(this.params);
         setInterval(()=> {
             this.fetch({data:this.params});
         }, 5000);
     }
     parse(res:any) {
-        console.log(res);
+        //console.log(res);
 
         var d:string = res.stamp;
         this.params.date = d.replace(' ', 'T');
@@ -219,7 +219,7 @@ class TableView extends Backbone.View<AppModel>{
        // collection.bind('reset', this.render);
       this.collection = options.collection;
         this.collection.bind('remove',(evt)=>{
-            console.log('remove',evt);
+            //console.log('remove',evt);
         },this);
 
         this.collection.bind("add",(evt)=>{
@@ -228,14 +228,14 @@ class TableView extends Backbone.View<AppModel>{
            this.$el.append(row.render().el);
       },this);
         this.render = function(){
-            console.log(this);
+            //console.log(this);
             return this;
         }
     }
 
     render():TableView{
 
-        console.log('render');
+        //console.log('render');
 
         return this;
     }

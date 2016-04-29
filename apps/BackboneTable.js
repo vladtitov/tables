@@ -133,13 +133,13 @@ var AgentsC = (function (_super) {
         this.url = options.url;
         this.params = options.params;
         this.fetch({ data: this.params });
-        console.log(this.params);
+        //console.log(this.params);
         setInterval(function () {
             _this.fetch({ data: _this.params });
         }, 5000);
     }
     AgentsC.prototype.parse = function (res) {
-        console.log(res);
+        //console.log(res);
         var d = res.stamp;
         this.params.date = d.replace(' ', 'T');
         //  var stamp:number = Date.now();
@@ -166,7 +166,7 @@ var TableView = (function (_super) {
         // collection.bind('reset', this.render);
         this.collection = options.collection;
         this.collection.bind('remove', function (evt) {
-            console.log('remove', evt);
+            //console.log('remove',evt);
         }, this);
         this.collection.bind("add", function (evt) {
             //  console.log('add',evt);
@@ -174,12 +174,12 @@ var TableView = (function (_super) {
             _this.$el.append(row.render().el);
         }, this);
         this.render = function () {
-            console.log(this);
+            //console.log(this);
             return this;
         };
     }
     TableView.prototype.render = function () {
-        console.log('render');
+        //console.log('render');
         return this;
     };
     return TableView;
