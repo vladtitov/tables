@@ -110,10 +110,10 @@ var Row = (function (_super) {
         return this;
     };
     Row.prototype.add = function () {
-        console.log('add');
+        //console.log('add');
     };
     Row.prototype.destroy = function () {
-        console.log('destroy');
+        //console.log('destroy');
     };
     return Row;
 }(Backbone.View));

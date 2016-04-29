@@ -153,10 +153,10 @@ class Row extends Backbone.View<AgentM>{
 
     }
     add():void{
-console.log('add');
+        //console.log('add');
     }
     destroy():void{
-        console.log('destroy');
+        //console.log('destroy');
     }
 
 
