@@ -1,7 +1,4 @@
-    /**
-     * Created by MERDOCK on 27.04.2016.
-     */
-    /*url="http://callcenter.front-desk.ca/service/crawl?a=get"*/
+
 
 var MTROptions={
         Selector:"marquee",
