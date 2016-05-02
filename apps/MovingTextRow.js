@@ -5,7 +5,7 @@
 var MTROptions = {
     selector: "",
     url: {},
-    interval: 30,
+    interval: 30
 };
 var a = new MovingTextRow({ selector: "dssd", GetParams: { a: "get" } });
 var MovingTextRow = (function () {
