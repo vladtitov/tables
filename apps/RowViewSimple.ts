@@ -4,13 +4,13 @@
     ///<reference path="base.ts"/>
 
 
-module v1{
+module tables{
 
     import AgentModel = table.AgentModel
 
-  export  class RowView extends Backbone.View<AgentModel> {
+  export  class RowViewSimple extends Backbone.View<AgentModel> {
         template:(data:any)=>string;
-        model:AgentModel
+        model:AgentModel;
         static template:any
 
         constructor(options:any) {
@@ -23,12 +23,12 @@ module v1{
 
         render() {
             // console.log(this.model);
-            this.$el.html(RowView.template(this.model.toJSON()));
+            this.$el.html(RowViewSimple.template(this.model.toJSON()));
 
             return this;
         }
 
-        remove():RowView {
+        remove():RowViewSimple {
             this.$el.fadeOut(()=> {
                 super.remove();
             })

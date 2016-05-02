@@ -7,11 +7,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var v1;
-(function (v1) {
-    var RowView = (function (_super) {
-        __extends(RowView, _super);
-        function RowView(options) {
+var tables;
+(function (tables) {
+    var RowViewSimple = (function (_super) {
+        __extends(RowViewSimple, _super);
+        function RowViewSimple(options) {
             var _this = this;
             _super.call(this, options);
             this.model.bind('change', function () { return _this.render(); });
@@ -19,26 +19,26 @@ var v1;
             this.model.bind('remove', function () { return _this.remove(); });
             //  this.model.bind('add',()=>this.add());
         }
-        RowView.prototype.render = function () {
+        RowViewSimple.prototype.render = function () {
             // console.log(this.model);
-            this.$el.html(RowView.template(this.model.toJSON()));
+            this.$el.html(RowViewSimple.template(this.model.toJSON()));
             return this;
         };
-        RowView.prototype.remove = function () {
+        RowViewSimple.prototype.remove = function () {
             var _this = this;
             this.$el.fadeOut(function () {
                 _super.prototype.remove.call(_this);
             });
             return this;
         };
-        RowView.prototype.add = function () {
+        RowViewSimple.prototype.add = function () {
             console.log('add');
         };
-        RowView.prototype.destroy = function () {
+        RowViewSimple.prototype.destroy = function () {
             console.log('destroy');
         };
-        return RowView;
+        return RowViewSimple;
     }(Backbone.View));
-    v1.RowView = RowView;
-})(v1 || (v1 = {}));
-//# sourceMappingURL=RowView1.js.map
+    tables.RowViewSimple = RowViewSimple;
+})(tables || (tables = {}));
+//# sourceMappingURL=RowViewSimple.js.map

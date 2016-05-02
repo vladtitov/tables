@@ -1,9 +1,9 @@
 ///<reference path="base.ts"/>
 
 
-module table1 { 
+module tables {
    import AgentModel = table.AgentModel;
-    import RowView = v1.RowView;
+    import RowView = tables.RowViewSimple;
     
     export class AgentsCollection extends Backbone.Collection<AgentModel> {
         model:any = AgentModel;

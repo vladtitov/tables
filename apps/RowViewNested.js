@@ -7,11 +7,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var v2;
-(function (v2) {
-    var RowView = (function (_super) {
-        __extends(RowView, _super);
-        function RowView(options) {
+var tables;
+(function (tables) {
+    var RowViewNested = (function (_super) {
+        __extends(RowViewNested, _super);
+        function RowViewNested(options) {
             var _this = this;
             _super.call(this, options);
             this.model.bind('change:icon', function () { return _this.changeIcon1(); });
@@ -22,22 +22,22 @@ var v2;
             this.model.bind('remove', function () { return _this.remove(); });
             //  this.model.bind('add',()=>this.add());
         }
-        RowView.prototype.onTimeChange = function () {
+        RowViewNested.prototype.onTimeChange = function () {
             var TimeSpan = this.$time;
             this.time = this.model.get("time");
         };
-        RowView.prototype.onTimeColorChange = function () {
+        RowViewNested.prototype.onTimeColorChange = function () {
             var TimeSpan = this.$time;
             TimeSpan.removeClass().addClass(this.model.get("time_color"));
         };
-        RowView.prototype.changeAux = function () {
+        RowViewNested.prototype.changeAux = function () {
             var old = this.$aux_child.addClass('out');
             var n = $('<div>').addClass('trans in').html(this.model.get('aux')).appendTo(this.$aux);
             setTimeout(function () { n.removeClass('in'); }, 10);
             setTimeout(function () { old.remove(); }, 2000);
             this.$aux_child = n;
         };
-        RowView.prototype.changeIcon1 = function () {
+        RowViewNested.prototype.changeIcon1 = function () {
             var $icon = this.$icon;
             var old = this.$icon_child.addClass('out');
             setTimeout(function () {
@@ -49,7 +49,7 @@ var v2;
             }, 10);
             this.$icon_child = newdiv;
         };
-        RowView.prototype.initialize = function () {
+        RowViewNested.prototype.initialize = function () {
             var _this = this;
             this.$el.html(RowView.template(this.model.toJSON()));
             this.$icon = this.$el.find('.icon').first();
@@ -65,10 +65,10 @@ var v2;
                 _this.$time.text(("0" + dt.getUTCHours()).substr(-2) + ":" + ("0" + dt.getUTCMinutes()).substr(-2) + ":" + ("0" + dt.getUTCSeconds()).substr(-2));
             }, 1000);
         };
-        RowView.prototype.initMe = function () {
+        RowViewNested.prototype.initMe = function () {
             this.Icon = this.$el.find('.icon:first').get();
         };
-        RowView.prototype.render = function () {
+        RowViewNested.prototype.render = function () {
             //if(!this.isInit)this.initMe();
             //this.$icon.attr('class',this.model.get('icon'));
             // console.log(this.model);
@@ -77,25 +77,25 @@ var v2;
             // this.$el.html(Row.template(this.model.toJSON()));
             return this;
         };
-        RowView.prototype.changeIcon2 = function () {
+        RowViewNested.prototype.changeIcon2 = function () {
         };
-        RowView.prototype.changeIcon3 = function () {
+        RowViewNested.prototype.changeIcon3 = function () {
         };
-        RowView.prototype.remove = function () {
+        RowViewNested.prototype.remove = function () {
             var _this = this;
             this.$el.fadeOut(function () {
                 _super.prototype.remove.call(_this);
             });
             return this;
         };
-        RowView.prototype.add = function () {
+        RowViewNested.prototype.add = function () {
             console.log('add');
         };
-        RowView.prototype.destroy = function () {
+        RowViewNested.prototype.destroy = function () {
             console.log('destroy');
         };
-        return RowView;
+        return RowViewNested;
     }(Backbone.View));
-    v2.RowView = RowView;
-})(v2 || (v2 = {}));
-//# sourceMappingURL=RowView2.js.map
+    tables.RowViewNested = RowViewNested;
+})(tables || (tables = {}));
+//# sourceMappingURL=RowViewNested.js.map

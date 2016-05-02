@@ -9,14 +9,14 @@
 
 $(document).ready(function(){
 
-    var collection = new table1.AgentsCollection({
+    var collection = new tables.AgentsCollection({
         url:'http://callcenter.front-desk.ca/service/get-agents-all',
         params:{
             date:'2016-03-15T7:58:34'
         }
     });
 
-    var t = new table1.TableView({
+    var t = new tables.TableView({
         container:'#Table1',
         rowTempalete:'#row-template',
         collection:collection

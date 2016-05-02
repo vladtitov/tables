@@ -4,10 +4,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var table1;
-(function (table1) {
+var tables;
+(function (tables) {
     var AgentModel = table.AgentModel;
-    var RowView = v1.RowView;
+    var RowView = tables.RowViewSimple;
     var AgentsCollection = (function (_super) {
         __extends(AgentsCollection, _super);
         function AgentsCollection(options) {
@@ -36,7 +36,7 @@ var table1;
         };
         return AgentsCollection;
     }(Backbone.Collection));
-    table1.AgentsCollection = AgentsCollection;
+    tables.AgentsCollection = AgentsCollection;
     var TableView = (function (_super) {
         __extends(TableView, _super);
         function TableView(options) {
@@ -66,6 +66,6 @@ var table1;
         };
         return TableView;
     }(Backbone.View));
-    table1.TableView = TableView;
-})(table1 || (table1 = {}));
+    tables.TableView = TableView;
+})(tables || (tables = {}));
 //# sourceMappingURL=BackboneTable.js.map
