@@ -5,8 +5,6 @@
 ///<reference path="base.ts"/>
 
 
-
-
 $(document).ready(function(){
 
     var collection = new tables.AgentsCollection({

@@ -71,7 +71,7 @@ module tables{
         }
 
         initialize(){
-            this.$el.html(RowView.template(this.model.toJSON()));
+            this.$el.html(RowViewNested.template(this.model.toJSON()));
             this.$icon = this.$el.find('.icon').first();
             this.$icon_child = this.$icon.children();
             this.$aux = this.$el.find('.aux').first();
@@ -114,7 +114,7 @@ module tables{
 
         }
 
-        remove():RowView{
+        remove():RowViewNested {
             this.$el.fadeOut(()=>{
                 super.remove();
             })

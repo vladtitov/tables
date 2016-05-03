@@ -3,7 +3,7 @@
 
 module tables {
    import AgentModel = table.AgentModel;
-    import RowView = tables.RowViewSimple;
+    import RowView = tables.RowViewNested;
     
     export class AgentsCollection extends Backbone.Collection<AgentModel> {
         model:any = AgentModel;
