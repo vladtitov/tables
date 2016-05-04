@@ -1,11 +1,4 @@
-
-
-var MTROptions={
-        Selector:"marquee",
-        Url:"http://callcenter.front-desk.ca/service/crawl",
-        RequestParams:{a:"get"},
-        Interval:5000,
-}
+///<reference path="base.ts"/>
 
 class MovingTextRow{
     private TimerId:number;
@@ -22,12 +15,15 @@ class MovingTextRow{
         for(var str in options)this[str]=options[str];
         this.$Element=$(options.Selector);
 
+        console.log('constr');
         if (this.$Element===undefined||this.$Element.get(0).tagName!='MARQUEE'){
             console.error("MovingTextRow: Тэг '<marquee>' по указанному селектору не найден!");
             return;
         }
         this.RequestParams=options.RequestParams;
-        this.$Element.on("scroll",()=>{this.TextUpdater();});
+        this.$Element.get(0).addEventListener("onstart",()=>{
+            console.log('event');
+        });
         this.Start()
     }
     
@@ -66,9 +62,19 @@ class MovingTextRow{
     }
     
     private TextUpdater():void{
-        if (this.$Element.scrollLeft>=this.LastScrollWidth){
-            this.Render();
-        }
+        console.log('scroll');
+
+      //  if (this.$Element.scrollLeft>=this.LastScrollWidth){
+          //  this.Render();
+       // }
     }
 }
+var MTROptions={
+    Selector:"marquee",
+    Url:"http://callcenter.front-desk.ca/service/crawl",
+    RequestParams:{a:"get"},
+    Interval:5000,
+}
+
+
 var movingTextRow =new MovingTextRow(MTROptions);

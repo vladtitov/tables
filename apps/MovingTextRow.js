@@ -1,24 +1,21 @@
-var MTROptions = {
-    Selector: "marquee",
-    Url: "http://callcenter.front-desk.ca/service/crawl",
-    RequestParams: { a: "get" },
-    Interval: 5000
-};
+///<reference path="base.ts"/>
 var MovingTextRow = (function () {
     function MovingTextRow(options) {
-        var _this = this;
         this.Interval = 20;
         this.isFirstTime = true;
         this.Separator = "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0";
         for (var str in options)
             this[str] = options[str];
         this.$Element = $(options.Selector);
+        console.log('constr');
         if (this.$Element === undefined || this.$Element.get(0).tagName != 'MARQUEE') {
             console.error("MovingTextRow: Тэг '<marquee>' по указанному селектору не найден!");
             return;
         }
         this.RequestParams = options.RequestParams;
-        this.$Element.on("scroll", function () { _this.TextUpdater(); });
+        this.$Element.get(0).addEventListener("onstart", function () {
+            console.log('event');
+        });
         this.Start();
     }
     MovingTextRow.prototype.Start = function () {
@@ -58,11 +55,18 @@ var MovingTextRow = (function () {
         setTimeout(function () { _this.LastScrollWidth = _this.$Element.get(0).scrollWidth - _this.$Element.get(0).offsetWidth; }, 10);
     };
     MovingTextRow.prototype.TextUpdater = function () {
-        if (this.$Element.scrollLeft >= this.LastScrollWidth) {
-            this.Render();
-        }
+        console.log('scroll');
+        //  if (this.$Element.scrollLeft>=this.LastScrollWidth){
+        //  this.Render();
+        // }
     };
     return MovingTextRow;
 }());
+var MTROptions = {
+    Selector: "marquee",
+    Url: "http://callcenter.front-desk.ca/service/crawl",
+    RequestParams: { a: "get" },
+    Interval: 5000
+};
 var movingTextRow = new MovingTextRow(MTROptions);
 //# sourceMappingURL=MovingTextRow.js.map

@@ -6,9 +6,7 @@
     ///<reference path="../typings/require.d.ts"/>
     ///<reference path="../typings/backbone-global.d.ts"/>
 ///<reference path="BackboneTable.ts"/>
-///<reference path="RowView2.ts"/>
-///<reference path="RowView1.ts"/>
-///<reference path="RowModel.ts"/>
+
 
 
 
