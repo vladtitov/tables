@@ -17,6 +17,7 @@ module utils{
        timerId:number;
        step:number=0;
        delay:number=1;
+       speed:number=0.5;
        private currentScroll:number=0;
        private actualScroll:number;
 
@@ -52,7 +53,7 @@ module utils{
             this.currentScroll+=h;
            this.$scrollWindow.animate({
                scrollTop:this.currentScroll
-           },()=>{
+           },this.speed,()=>{
                this.checkScroll();
            })
        }
@@ -62,6 +63,7 @@ module utils{
 
        init():void{
            this.delay = this.delay*1000;
+           this.speed = this.speed*1000;
            this.$scrollWindow.on('mouseover',(evt)=>this.stop(evt));
            this.$scrollWindow.on('mouseleave',(evt)=>this.start(evt));
        }
@@ -70,10 +72,12 @@ module utils{
             if(this.isRunning) return
             this.timerId = setInterval(()=>{this.nextStep()},this.delay);        }
         stop(evt:JQueryEventObject):void{
+
             //console.log('stopping',this);
             clearInterval(this.timerId);
 
             this.isRunning=false;
+            $(".nano").nanoScroller();
         }
     }
 }

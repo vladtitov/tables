@@ -7,6 +7,7 @@ var utils;
             this.scrollHeight = 0;
             this.step = 0;
             this.delay = 1;
+            this.speed = 0.5;
             this.currentScroll = 0;
             for (var str in options)
                 this[str] = options[str];
@@ -40,7 +41,7 @@ var utils;
             this.currentScroll += h;
             this.$scrollWindow.animate({
                 scrollTop: this.currentScroll
-            }, function () {
+            }, this.speed, function () {
                 _this.checkScroll();
             });
         };
@@ -50,6 +51,7 @@ var utils;
         AutoScroller.prototype.init = function () {
             var _this = this;
             this.delay = this.delay * 1000;
+            this.speed = this.speed * 1000;
             this.$scrollWindow.on('mouseover', function (evt) { return _this.stop(evt); });
             this.$scrollWindow.on('mouseleave', function (evt) { return _this.start(evt); });
         };
@@ -64,6 +66,7 @@ var utils;
             //console.log('stopping',this);
             clearInterval(this.timerId);
             this.isRunning = false;
+            $(".nano").nanoScroller();
         };
         return AutoScroller;
     }());

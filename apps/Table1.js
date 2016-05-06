@@ -16,9 +16,12 @@ $(document).ready(function () {
         scroll_window: '#Table1 .scroll-window'
     });
     var scroller = new utils.AutoScroller({
-        scrollWindow: '#Table1 .scroll-window',
+        //scrollWindow:'#Table1 .scroll-window',
+        scrollWindow: '#Table1 .scroll-content',
         scrollContent: '#Table1 scroll-content',
-        list: '#Table1 .scroll-window tbody'
+        list: '#Table1 .scroll-window tbody',
+        delay: 2,
+        speed: 0.7
     });
 });
 //# sourceMappingURL=Table1.js.map
