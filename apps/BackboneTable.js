@@ -48,44 +48,32 @@ var tables;
     var TableView = (function (_super) {
         __extends(TableView, _super);
         function TableView(options) {
-            var _this = this;
             _super.call(this, options);
             this.delay = 0;
+            this.firstTime = true;
             this.scroll_window = $(options.scroll_window);
             this.setHeight();
-            console.log(this.scroll_height);
             this.container = $(options.container);
-            this.setElement(this.container.find('tbody').first(), true);
             RowView.template = _.template($(options.rowTempalete).html());
-            // collection.bind('reset', this.render);
             this.collection = options.collection;
+            this.setElement(this.container.find('tbody').first(), true);
+        }
+        TableView.prototype.initialize = function () {
+            var _this = this;
             this.collection.bind('remove', function (evt) {
                 console.log('remove', evt);
             }, this);
-            this.collection.once("add", function (model) {
-                _this.populateList();
-                console.log('add');
-            }, this);
-            this.render = function () {
-                console.log(this);
-                return this;
-            };
-        }
-        TableView.prototype.populateList = function () {
-            var _this = this;
-            var model = this.collection.getOldest(false);
-            if (!model)
-                return;
-            setTimeout(function () {
-                _this.addRow(model);
-                if (_this.$el.height() < _this.scroll_height)
-                    _this.populateList();
+            this.collection.on("add", function (model) {
+                if (_this.firstTime)
+                    setTimeout(function () { return _this.addRow(model); }, _this.delay += 50);
                 else
-                    console.log('list full');
-            }, 100);
+                    _this.addRow(model);
+            }, this);
+            this.collection.once("add", function (model) {
+                setTimeout(function () { _this.firstTime = false; }, 2000);
+            }, this);
         };
         TableView.prototype.addRow = function (model) {
-            var d = $.Deferred();
             var row = new RowView({ model: model, tagName: 'tr' });
             row.appendTo(this.$el);
         };
