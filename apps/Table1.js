@@ -12,7 +12,8 @@ $(document).ready(function () {
     var t = new tables.TableView({
         container: '#Table1',
         rowTempalete: '#row-template',
-        collection: collection
+        collection: collection,
+        scroll_window: '#Table1 .scroll-window'
     });
 });
 //# sourceMappingURL=Table1.js.map

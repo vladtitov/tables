@@ -22,6 +22,14 @@ var tables;
                 _this.fetch({ data: _this.params });
             }, 5000);
         }
+        AgentsCollection.prototype.getOldest = function (isMount) {
+            var oldest = this.models[0];
+            this.each(function (model) {
+                if (model.mounted == isMount && model.timestamp < oldest.timestamp)
+                    oldest = model;
+            });
+            return oldest;
+        };
         AgentsCollection.prototype.parse = function (res) {
             var d = res.stamp;
             this.params.date = d.replace(' ', 'T');
@@ -42,6 +50,10 @@ var tables;
         function TableView(options) {
             var _this = this;
             _super.call(this, options);
+            this.delay = 0;
+            this.scroll_window = $(options.scroll_window);
+            this.setHeight();
+            console.log(this.scroll_height);
             this.container = $(options.container);
             this.setElement(this.container.find('tbody').first(), true);
             RowView.template = _.template($(options.rowTempalete).html());
@@ -50,16 +62,36 @@ var tables;
             this.collection.bind('remove', function (evt) {
                 console.log('remove', evt);
             }, this);
-            this.collection.bind("add", function (evt) {
-                //  console.log('add',evt);
-                var row = new RowView({ model: evt, tagName: 'tr' });
-                _this.$el.append(row.render().el);
+            this.collection.once("add", function (model) {
+                _this.populateList();
+                console.log('add');
             }, this);
             this.render = function () {
                 console.log(this);
                 return this;
             };
         }
+        TableView.prototype.populateList = function () {
+            var _this = this;
+            var model = this.collection.getOldest(false);
+            if (!model)
+                return;
+            setTimeout(function () {
+                _this.addRow(model);
+                if (_this.$el.height() < _this.scroll_height)
+                    _this.populateList();
+                else
+                    console.log('list full');
+            }, 100);
+        };
+        TableView.prototype.addRow = function (model) {
+            var d = $.Deferred();
+            var row = new RowView({ model: model, tagName: 'tr' });
+            row.appendTo(this.$el);
+        };
+        TableView.prototype.setHeight = function () {
+            this.scroll_height = this.scroll_window.height();
+        };
         TableView.prototype.render = function () {
             console.log('render');
             return this;

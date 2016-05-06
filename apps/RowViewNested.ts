@@ -24,15 +24,15 @@ module tables{
         private $aux_child;
         private $time:JQuery;
         private time:number;
+
         constructor(options:any){
             super(options);
-
-            this.model.bind('change:icon', ()=>this.changeIcon1());
-            this.model.bind('change:aux', ()=>this.changeAux());
-            this.model.bind('change:time', ()=>this.onTimeChange());
-            this.model.bind('change:time_color', ()=>this.onTimeColorChange());
-            this.model.bind('destroy',()=>this.destroy());
-            this.model.bind('remove',()=>this.remove());
+            this.listenTo(this.model,'change:icon', ()=>this.changeIcon1());
+            this.listenTo( this.model,'change:aux', ()=>this.changeAux());
+            this.listenTo(this.model,'change:time', ()=>this.onTimeChange());
+            this.listenTo(this.model,'change:time_color', ()=>this.onTimeColorChange());
+            this.listenTo(this.model,'destroy',()=>this.destroy());
+            this.listenTo(this.model,'remove',()=>this.remove());
 
 
             //  this.model.bind('add',()=>this.add());
@@ -40,8 +40,16 @@ module tables{
         }
 
         private onTimeChange():void{
-            var TimeSpan:JQuery=this.$time;
-            this.time = this.model.get("time");
+          //  var TimeSpan:JQuery=this.$time;
+          //  this.time = this.model.get("time");
+            var dt:Date =new Date();
+            dt.setSeconds(-(this.model.get("time")));
+            dt=new Date(Date.now()-dt.getTime());
+
+            this.$time.text(("0"+dt.getUTCHours()).substr(-2)+":"+("0"+dt.getUTCMinutes()).substr(-2)+":"+("0"+dt.getUTCSeconds()).substr(-2));
+          //  console.log(this.time);
+          //  this.$time.text(this.time);
+
         }
         private onTimeColorChange():void{
             var TimeSpan:JQuery=this.$time;
@@ -76,45 +84,40 @@ module tables{
             this.$icon_child = this.$icon.children();
             this.$aux = this.$el.find('.aux').first();
             this.$aux_child =  this.$aux.children();
-            this.$time = this.$el.find('.td2>span').first();
+            this.$time = this.$el.find('.col2>span').first();
 
 
             //d.setUTCSeconds(this.model.get("time"));
-            setInterval(()=>{
+           /* setInterval(()=>{
                 var dt:Date =new Date();
                 dt.setSeconds(-(this.model.get("time")));
                 dt=new Date(Date.now()-dt.getTime());
 
-                this.$time.text(("0"+dt.getUTCHours()).substr(-2)+":"+("0"+dt.getUTCMinutes()).substr(-2)+":"+("0"+dt.getUTCSeconds()).substr(-2));},1000);
+                this.$time.text(("0"+dt.getUTCHours()).substr(-2)+":"+("0"+dt.getUTCMinutes()).substr(-2)+":"+("0"+dt.getUTCSeconds()).substr(-2));},1000);*/
         }
         private initMe():void{
             this.Icon= this.$el.find('.icon:first').get();
 
         }
+
+        appendTo(container:JQuery):any{
+            container.append(this.$el);
+            this.model.height = this.$el.height()
+            this.model.mounted = true;
+            this.model.timestamp = Date.now();
+            return this;
+        }
+
         render() {
-
-            //if(!this.isInit)this.initMe();
-            //this.$icon.attr('class',this.model.get('icon'));
-            // console.log(this.model);
-
-            // if (this.isFilling){return}
-            // this.changeIcon1();
-            // this.$el.html(Row.template(this.model.toJSON()));
-
 
             return this;
         }
 
-        private changeIcon2(){
 
-
-        }
-        private changeIcon3(){
-
-
-        }
 
         remove():RowViewNested {
+            this.model.mounted = false;
+            this.model.timestamp = Date.now();
             this.$el.fadeOut(()=>{
                 super.remove();
             })
