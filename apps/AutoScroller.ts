@@ -33,38 +33,27 @@ module utils{
            console.log('scrollend');
            this.stop(null)
        }
-       /*private rearange():void{
-           this.step =0;
-           this.currentScroll=0;
-           this.$scrollWindow.scrollTop(0);
-       }*/
-       private getScrollHeight():number{
-           switch(this.step){
-               case 1:
-                   return this.$list.children(0).height();
-               case 2:
-                   return this.$list.children(1).height();
-               default:
-                   this.step =0;
-                   this.currentScroll=0;
-                   this.$scrollWindow.scrollTop(0);
-                   this.$list.append(this.$list.children().first());
-                   this.$list.append(this.$list.children().first());
-                   return this.$list.children(0).height();
+
+       private checkScroll(){
+           var scroll:number =  this.$scrollWindow.scrollTop();
+           if(scroll == this.actualScroll)this.onScrollEnd();
+           this.actualScroll = scroll;
+           if(this.step==2){
+               this.step = 0;
+               this.currentScroll=0;
+               this.$list.append(this.$list.children().first());
+               this.$list.append(this.$list.children().first());
+               this.$scrollWindow.scrollTop(0);
            }
        }
        private nextStep():void{
+            var h:number = this.$list.children(this.step).height()
            this.step++;
-            var h:number = this.getScrollHeight();
-           console.log(h);
             this.currentScroll+=h;
            this.$scrollWindow.animate({
                scrollTop:this.currentScroll
            },()=>{
-              var scroll:number =  this.$scrollWindow.scrollTop();
-               if(scroll == this.actualScroll)this.onScrollEnd();
-               this.actualScroll = scroll;
-               console.log();
+               this.checkScroll();
            })
        }
        setHeight():void{
@@ -73,8 +62,8 @@ module utils{
 
        init():void{
            this.delay = this.delay*1000;
-           this.$scrollWindow.on('onmouseenter',(evt)=>this.stop(evt));
-           this.$scrollWindow.on('onmouseleave',(evt)=>this.start(evt));
+           this.$scrollWindow.on('mouseover',(evt)=>this.stop(evt));
+           this.$scrollWindow.on('mouseleave',(evt)=>this.start(evt));
        }
         start(evt:JQueryEventObject):void{
            // console.log('starting',this);

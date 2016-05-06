@@ -20,40 +20,28 @@ var utils;
             console.log('scrollend');
             this.stop(null);
         };
-        /*private rearange():void{
-            this.step =0;
-            this.currentScroll=0;
-            this.$scrollWindow.scrollTop(0);
-        }*/
-        AutoScroller.prototype.getScrollHeight = function () {
-            switch (this.step) {
-                case 1:
-                    return this.$list.children(0).height();
-                case 2:
-                    return this.$list.children(1).height();
-                default:
-                    this.step = 0;
-                    this.currentScroll = 0;
-                    this.$scrollWindow.scrollTop(0);
-                    this.$list.append(this.$list.children().first());
-                    this.$list.append(this.$list.children().first());
-                    return this.$list.children(0).height();
+        AutoScroller.prototype.checkScroll = function () {
+            var scroll = this.$scrollWindow.scrollTop();
+            if (scroll == this.actualScroll)
+                this.onScrollEnd();
+            this.actualScroll = scroll;
+            if (this.step == 2) {
+                this.step = 0;
+                this.currentScroll = 0;
+                this.$list.append(this.$list.children().first());
+                this.$list.append(this.$list.children().first());
+                this.$scrollWindow.scrollTop(0);
             }
         };
         AutoScroller.prototype.nextStep = function () {
             var _this = this;
+            var h = this.$list.children(this.step).height();
             this.step++;
-            var h = this.getScrollHeight();
-            console.log(h);
             this.currentScroll += h;
             this.$scrollWindow.animate({
                 scrollTop: this.currentScroll
             }, function () {
-                var scroll = _this.$scrollWindow.scrollTop();
-                if (scroll == _this.actualScroll)
-                    _this.onScrollEnd();
-                _this.actualScroll = scroll;
-                console.log();
+                _this.checkScroll();
             });
         };
         AutoScroller.prototype.setHeight = function () {
@@ -62,8 +50,8 @@ var utils;
         AutoScroller.prototype.init = function () {
             var _this = this;
             this.delay = this.delay * 1000;
-            this.$scrollWindow.on('onmouseenter', function (evt) { return _this.stop(evt); });
-            this.$scrollWindow.on('onmouseleave', function (evt) { return _this.start(evt); });
+            this.$scrollWindow.on('mouseover', function (evt) { return _this.stop(evt); });
+            this.$scrollWindow.on('mouseleave', function (evt) { return _this.start(evt); });
         };
         AutoScroller.prototype.start = function (evt) {
             var _this = this;
