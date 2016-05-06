@@ -2,9 +2,13 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es5",
-    "sourceMap": true
+    "sourceMap": true,
+    "outFile": "out.js"
   },
   "exclude": [
     "node_modules"
+  ],
+  "files": [
+    "apps/base.ts"
   ]
 }

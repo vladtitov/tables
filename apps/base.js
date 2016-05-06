@@ -6,4 +6,7 @@
 ///<reference path="../typings/require.d.ts"/>
 ///<reference path="../typings/backbone-global.d.ts"/>
 ///<reference path="BackboneTable.ts"/>
+///<reference path="RowViewNested.ts"/>
+///<reference path="RowViewSimple.ts"/>
+///<reference path="RowModel.ts"/>
 //# sourceMappingURL=base.js.map
