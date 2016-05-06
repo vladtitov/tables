@@ -23,14 +23,8 @@ var tables;
             //  this.model.bind('add',()=>this.add());
         }
         RowViewNested.prototype.onTimeChange = function () {
-            //  var TimeSpan:JQuery=this.$time;
-            //  this.time = this.model.get("time");
-            var dt = new Date();
-            dt.setSeconds(-(this.model.get("time")));
-            dt = new Date(Date.now() - dt.getTime());
-            this.$time.text(("0" + dt.getUTCHours()).substr(-2) + ":" + ("0" + dt.getUTCMinutes()).substr(-2) + ":" + ("0" + dt.getUTCSeconds()).substr(-2));
-            //  console.log(this.time);
-            //  this.$time.text(this.time);
+            var t = this.model.get("time");
+            this.$time.text(Formatter.formatTime(t));
         };
         RowViewNested.prototype.onTimeColorChange = function () {
             var TimeSpan = this.$time;
@@ -62,13 +56,7 @@ var tables;
             this.$aux = this.$el.find('.aux').first();
             this.$aux_child = this.$aux.children();
             this.$time = this.$el.find('.col2>span').first();
-            //d.setUTCSeconds(this.model.get("time"));
-            /* setInterval(()=>{
-                 var dt:Date =new Date();
-                 dt.setSeconds(-(this.model.get("time")));
-                 dt=new Date(Date.now()-dt.getTime());
- 
-                 this.$time.text(("0"+dt.getUTCHours()).substr(-2)+":"+("0"+dt.getUTCMinutes()).substr(-2)+":"+("0"+dt.getUTCSeconds()).substr(-2));},1000);*/
+            this.onTimeChange();
         };
         RowViewNested.prototype.initMe = function () {
             this.Icon = this.$el.find('.icon:first').get();

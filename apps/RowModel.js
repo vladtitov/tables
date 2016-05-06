@@ -24,9 +24,7 @@ var table;
         }
         AgentModel.prototype.initialize = function () {
             var _this = this;
-            console.log('init');
             setInterval(function () {
-                // console.log(this.get('time'));
                 var t = _this.get('time') + 1;
                 _this.set('time', t);
             }, 1000);

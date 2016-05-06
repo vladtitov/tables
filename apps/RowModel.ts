@@ -20,11 +20,9 @@ module table{
         timestamp:number=0;
         height:number;
         initialize(){
-            console.log('init');
             setInterval(()=>{
-              // console.log(this.get('time'));
                 var t:number = this.get('time')+1;
-              this.set('time',t);
+              this.set('time',t);                
             },1000)
         }
         defaults():VOAgent {

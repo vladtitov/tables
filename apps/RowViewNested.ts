@@ -40,16 +40,9 @@ module tables{
         }
 
         private onTimeChange():void{
-          //  var TimeSpan:JQuery=this.$time;
-          //  this.time = this.model.get("time");
-            var dt:Date =new Date();
-            dt.setSeconds(-(this.model.get("time")));
-            dt=new Date(Date.now()-dt.getTime());
-
-            this.$time.text(("0"+dt.getUTCHours()).substr(-2)+":"+("0"+dt.getUTCMinutes()).substr(-2)+":"+("0"+dt.getUTCSeconds()).substr(-2));
-          //  console.log(this.time);
-          //  this.$time.text(this.time);
-
+         var t:number = this.model.get("time");        
+          
+            this.$time.text(Formatter.formatTime(t));
         }
         private onTimeColorChange():void{
             var TimeSpan:JQuery=this.$time;
@@ -85,15 +78,8 @@ module tables{
             this.$aux = this.$el.find('.aux').first();
             this.$aux_child =  this.$aux.children();
             this.$time = this.$el.find('.col2>span').first();
+            this.onTimeChange();
 
-
-            //d.setUTCSeconds(this.model.get("time"));
-           /* setInterval(()=>{
-                var dt:Date =new Date();
-                dt.setSeconds(-(this.model.get("time")));
-                dt=new Date(Date.now()-dt.getTime());
-
-                this.$time.text(("0"+dt.getUTCHours()).substr(-2)+":"+("0"+dt.getUTCMinutes()).substr(-2)+":"+("0"+dt.getUTCSeconds()).substr(-2));},1000);*/
         }
         private initMe():void{
             this.Icon= this.$el.find('.icon:first').get();
