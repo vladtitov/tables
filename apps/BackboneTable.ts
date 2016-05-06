@@ -2,7 +2,7 @@
 
 
 module tables {
-   import AgentModel = table.AgentModel;
+    import AgentModel = table.AgentModel;
     import RowView = tables.RowViewNested;
     
     export class AgentsCollection extends Backbone.Collection<AgentModel> {
