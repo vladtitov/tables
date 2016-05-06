@@ -40,10 +40,7 @@ module tables {
 
 
     export class TableView extends Backbone.View<AgentModel> {
-        collectionAgentsC;
-
         container:JQuery;
-
         constructor(options) {
             super(options);
             this.container = $(options.container);

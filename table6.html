@@ -22,9 +22,9 @@
 	</head>
 
 	<body>
-		<div class="row">
-				<div class="col-md-12">
-				<div id="Table1">
+		<div class="container">
+				<div id="Table1" class="row">
+					<div  class="">
 							<div class="div-one col0" >
 								<p class="paragraf-one">STATUS</p>
 							</div>
@@ -37,39 +37,41 @@
 							<div class="div-one col3">
 								<p class="paragraf-one">AUX</p>
 							</div>
+					</div>
 
-					<div>
-						<div>
+					<div class="scroll-window">
+						<div class="scroll-content">
+
 							<!--Template Row start -->
-							<script id="row-template" type="text/template" data-id="template">
-								<td class="col0 rel">
-									<div class="icon rel" >
-										<div class="<%=icon%>"  data-id="icon"></div>
-									</div>
-								</td>
-								<td class="col1">
-									<span data-id="name"><%=name%></span>
-								</td>
-								<td  class="col2">
-									<span data-id="time,time_color" class="<%=time_color%>"><%=time%></span>
-								</td>
-								<td class="col3">
-									<div class="aux rel">
-										<div data-id="aux,aux_color" ><%=aux%></div>
-									</div>
-								</td>
+									<script id="row-template" type="text/template" data-id="template">
+										<td class="col0 rel">
+											<div class="icon rel" >
+												<div class="<%=icon%>"  data-id="icon"></div>
+											</div>
+										</td>
+										<td class="col1">
+											<span data-id="name"><%=name%></span>
+										</td>
+										<td  class="col2">
+											<span data-id="time,time_color" class="<%=time_color%>"><%=time%></span>
+										</td>
+										<td class="col3">
+											<div class="aux rel">
+												<div data-id="aux,aux_color" ><%=aux%></div>
+											</div>
+										</td>
 
-							</script>
-							<!--Template Row end -->
-
-
-							<table class="table table-responsive">
-								<tbody>
-
-								</tbody>
+									</script>
+									<!--Template Row end -->
 
 
-							</table>
+									<table class="table table-responsive">
+										<tbody>
+
+										</tbody>
+
+
+									</table>
 						</div>
 					</div>
 
@@ -80,7 +82,7 @@
 					<script  src="apps/BackboneTable.js"></script>
 					<script  src="apps/Table1.js"></script>
 
-				</div>
+
 				</div>
 
 
