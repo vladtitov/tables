@@ -21,5 +21,11 @@ $(document).ready(function(){
         collection:collection,
         scroll_window:'#Table1 .scroll-window'
     });
+    
+    var scroller:utils.AutoScroller = new utils.AutoScroller({
+        scrollWindow:'#Table1 .scroll-window',
+        scrollContent:'#Table1 scroll-content',
+        list:'#Table1 .scroll-window tbody',
+    })
 
 })

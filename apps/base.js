@@ -10,4 +10,5 @@
 ///<reference path="RowViewSimple.ts"/>
 ///<reference path="RowModel.ts"/>
 ///<reference path="Formatter.ts"/>
+///<reference path="AutoScroller.ts"/>
 //# sourceMappingURL=base.js.map
